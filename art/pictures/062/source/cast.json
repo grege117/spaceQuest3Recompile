@@ -1,0 +1,23 @@
+{
+  "room": 62,
+  "picture": 62,
+  "screen": [
+    320,
+    200
+  ],
+  "objects": [
+    {
+      "name": "ego",
+      "view": 63,
+      "loop": 2,
+      "cel": 4,
+      "priority": 11,
+      "bounds": [
+        148,
+        126,
+        166,
+        167
+      ]
+    }
+  ]
+}

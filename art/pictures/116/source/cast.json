@@ -1,0 +1,23 @@
+{
+  "room": 116,
+  "picture": 116,
+  "screen": [
+    320,
+    200
+  ],
+  "objects": [
+    {
+      "name": "ship",
+      "view": 215,
+      "loop": 0,
+      "cel": 0,
+      "priority": 13,
+      "bounds": [
+        0,
+        5,
+        92,
+        45
+      ]
+    }
+  ]
+}

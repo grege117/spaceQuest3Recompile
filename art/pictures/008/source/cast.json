@@ -1,0 +1,36 @@
+{
+  "room": 8,
+  "picture": 8,
+  "screen": [
+    320,
+    200
+  ],
+  "objects": [
+    {
+      "name": "ego",
+      "view": 19,
+      "loop": 0,
+      "cel": 0,
+      "priority": 0,
+      "bounds": [
+        241,
+        2,
+        261,
+        35
+      ]
+    },
+    {
+      "name": "hatch",
+      "view": 21,
+      "loop": 0,
+      "cel": 0,
+      "priority": 8,
+      "bounds": [
+        175,
+        83,
+        201,
+        100
+      ]
+    }
+  ]
+}

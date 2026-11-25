@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101514">
+  <link rel="icon" href="data:,">
+  <title>Space Quest III · The Pirates of Pestulon</title>
+  <link rel="stylesheet" href="web/game.css">
+  <script type="module" src="web/game.js"></script>
+</head>
+<body>
+  <main>
+    <header class="mast">
+      <div><h1>Space Quest <span>III</span></h1><p>The Pirates of Pestulon</p></div>
+      <details class="controls"><summary>Controls</summary>
+        <div><p>Click the scene to walk or focus it and use the arrow keys. Press an arrow again to stop. Press the backtick key (<kbd>&#96;</kbd>) to switch between original and enhanced graphics. With the game screen focused, press <kbd>[</kbd> for the previous walking location or <kbd>]</kbd> for the next.</p>
+          <p>Send a command like <b>look</b> in Transmissions. Type <b>hint</b> for the current room.</p>
+          <p>Use the game screen for choices and arcade sequences. Press <kbd>F5</kbd> to save or <kbd>F7</kbd> to restore.</p>
+          <button id="inspect-art" type="button" disabled>Inspect room artwork</button>
+          <button id="capture" type="button">Download scene capture</button>
+          <p><a href="gallery/index.html" target="_blank" rel="noopener">Browse the PNG gallery</a> · <a href="gallery/space-quest-iii-gallery.zip" download>Download ZIP</a></p>
+        </div>
+      </details>
+    </header>
+    <div class="console">
+      <section class="display" aria-label="Game display">
+        <div class="location"><span class="signal" aria-hidden="true"></span><span id="location">Game setup</span></div>
+        <div class="screen">
+          <canvas id="canvas" width="320" height="200" tabindex="0" aria-label="Space Quest III game screen"></canvas>
+          <section id="game-import" aria-labelledby="import-title">
+            <h2 id="import-title">Load your game ZIP</h2>
+            <p>Choose your English DOS copy of Space Quest III. Game files open in your browser.</p>
+            <label for="game-file">From your device</label>
+            <input type="file" id="game-file" accept=".zip,application/zip" disabled>
+            <form id="zip-form">
+              <label for="zip-url">From a ZIP link</label>
+              <div><input type="url" id="zip-url" placeholder="https://…" required disabled>
+                <button id="zip-load" type="submit" disabled>Load ZIP</button></div>
+            </form>
+            <p id="import-status" role="status"></p>
+          </section>
+          <div id="loading" role="status" hidden>Starting game…</div>
+        </div>
+        <div class="display-foot"><span id="guidance">Choose a ZIP to start playing.</span><button id="graphics-mode" type="button" hidden>Enhanced graphics</button><button id="expand" type="button" aria-label="Toggle fullscreen game display" title="Fullscreen">Fullscreen</button></div>
+      </section>
+      <section class="messages" aria-labelledby="messages-title">
+        <header><span class="chat-icon" aria-hidden="true">···</span><h2 id="messages-title">Transmissions</h2></header>
+        <div id="log" role="log" aria-live="polite" aria-relevant="additions" tabindex="0"></div>
+        <form id="composer">
+          <label class="sr" for="command">Message or game command</label>
+          <input id="command" name="command" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="45" placeholder="Type a command…" disabled>
+          <button class="send" type="submit" aria-label="Send command" disabled>↑</button>
+        </form>
+      </section>
+    </div>
+  </main>
+  <dialog id="art-dialog" aria-labelledby="art-title">
+    <header><h2 id="art-title">Room artwork</h2><form method="dialog"><button aria-label="Close artwork inspector">Close</button></form></header>
+    <label for="art-room">Room</label>
+    <select id="art-room"></select>
+    <label for="art-layer">Layer</label>
+    <select id="art-layer">
+      <option value="background.png">Enhanced background</option>
+      <option value="source/background.png">Original picture</option>
+      <option value="source/priority.png">Priority map</option>
+      <option value="source/control.png">Control map</option>
+      <option value="cast">Sprite positions and priorities</option>
+      <option value="sprites.png">Enhanced sprites</option>
+      <option value="source/sprites.png">Original sprites</option>
+    </select>
+    <img id="art-preview" alt="">
+    <p id="art-caption"></p>
+    <footer><a id="art-download" download>Download PNG</a>
+    <a id="cel-metadata" href="art/junk-bay/source/resources.json" download>Cel metadata</a>
+    <a id="other-edition" href="?art=original" target="_blank" rel="noopener">Play with original art ↗</a></footer>
+  </dialog>
+</body>
+</html>

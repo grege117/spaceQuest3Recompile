@@ -1,0 +1,1902 @@
+{
+  "1": {
+    "name": "Space Quest III title",
+    "rooms": [
+      1
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/001/manifest.json",
+    "artworkViews": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      601,
+      926
+    ]
+  },
+  "2": {
+    "name": "Junk bay",
+    "artwork": "art/junk-bay/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      11,
+      12,
+      36,
+      258
+    ],
+    "rooms": [
+      2
+    ],
+    "kind": "painted",
+    "castSample": true
+  },
+  "3": {
+    "name": "Scrap heap",
+    "artwork": "art/scrap-heap/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      36,
+      193,
+      258
+    ],
+    "rooms": [
+      3
+    ],
+    "kind": "painted",
+    "castSample": true
+  },
+  "4": {
+    "name": "Bucket conveyor",
+    "artwork": "art/bucket-conveyor/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      13,
+      36,
+      258
+    ],
+    "rooms": [
+      4
+    ],
+    "kind": "painted",
+    "castSample": true
+  },
+  "5": {
+    "name": "Tanker wreck",
+    "artwork": "art/tanker-wreck/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      36,
+      258
+    ],
+    "rooms": [
+      5
+    ],
+    "kind": "painted",
+    "castSample": true
+  },
+  "6": {
+    "name": "Tanker interior",
+    "artwork": "art/tanker-interior/manifest.json",
+    "artworkViews": [
+      0,
+      7,
+      15,
+      18,
+      192,
+      751
+    ],
+    "rooms": [
+      6
+    ],
+    "kind": "painted",
+    "castSample": true
+  },
+  "7": {
+    "name": "Robot head",
+    "artwork": "art/robot-head/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      14,
+      17,
+      36,
+      258
+    ],
+    "rooms": [
+      7
+    ],
+    "kind": "painted",
+    "castSample": true
+  },
+  "8": {
+    "name": "Aluminum Mallard",
+    "rooms": [
+      8
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/008/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      16,
+      19,
+      21,
+      29,
+      36,
+      193,
+      257,
+      258,
+      750
+    ],
+    "castSample": true
+  },
+  "9": {
+    "name": "Upper conveyor",
+    "rooms": [
+      9
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/009/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      13,
+      17,
+      22,
+      23,
+      36,
+      258,
+      259,
+      260,
+      261,
+      750
+    ]
+  },
+  "10": {
+    "name": "Shredder",
+    "rooms": [
+      10
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/010/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      17,
+      20,
+      22,
+      23,
+      24,
+      36,
+      258,
+      259,
+      260,
+      261,
+      750
+    ]
+  },
+  "11": {
+    "name": "Overhead rail",
+    "rooms": [
+      11
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/011/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      17,
+      22,
+      23,
+      25,
+      36,
+      258,
+      259,
+      260,
+      261
+    ]
+  },
+  "12": {
+    "name": "Rail junction",
+    "rooms": [
+      12
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/012/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      17,
+      22,
+      23,
+      36,
+      258,
+      259,
+      260,
+      261
+    ]
+  },
+  "13": {
+    "name": "Grabber station",
+    "rooms": [
+      13
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/013/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      10,
+      17,
+      22,
+      23,
+      26,
+      36,
+      258,
+      260,
+      261,
+      289,
+      752,
+      852
+    ]
+  },
+  "14": {
+    "name": "Mallard cabin",
+    "rooms": [
+      14
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/014/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      28,
+      31,
+      36,
+      51,
+      65,
+      212,
+      258
+    ]
+  },
+  "15": {
+    "name": "Debris hollow",
+    "rooms": [
+      15
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/015/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      15,
+      19,
+      29,
+      32,
+      33,
+      34,
+      35,
+      36,
+      258,
+      288
+    ]
+  },
+  "17": {
+    "name": "Flight controls",
+    "rooms": [
+      17
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/017/manifest.json",
+    "artworkViews": [
+      41,
+      51,
+      141
+    ],
+    "castSample": true
+  },
+  "18": {
+    "name": "Combat display",
+    "rooms": [
+      18
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/018/manifest.json",
+    "artworkViews": [
+      45,
+      46,
+      47,
+      48,
+      51,
+      55,
+      146
+    ]
+  },
+  "19": {
+    "name": "Navigation computer",
+    "rooms": [
+      19
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/019/manifest.json",
+    "artworkViews": [
+      49,
+      50,
+      51,
+      212
+    ],
+    "castSample": true
+  },
+  "20": {
+    "name": "Freighter departure",
+    "rooms": [
+      20
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/020/manifest.json",
+    "artworkViews": [
+      759
+    ]
+  },
+  "25": {
+    "name": "Order counter",
+    "rooms": [
+      25
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/025/manifest.json",
+    "artworkViews": [
+      38
+    ]
+  },
+  "27": {
+    "name": "Monolith Burger",
+    "rooms": [
+      27
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/027/manifest.json",
+    "artworkViews": [
+      39,
+      52
+    ]
+  },
+  "28": {
+    "name": "Dining area",
+    "rooms": [
+      28
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/028/manifest.json",
+    "artworkViews": [
+      0,
+      43,
+      44,
+      53,
+      64,
+      137,
+      213
+    ],
+    "castSample": true
+  },
+  "29": {
+    "name": "Restaurant counter",
+    "rooms": [
+      29
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/029/manifest.json",
+    "artworkViews": [
+      56,
+      57,
+      59,
+      85
+    ]
+  },
+  "30": {
+    "name": "Arnoid’s visor",
+    "rooms": [
+      31
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/030/manifest.json",
+    "artworkViews": [
+      54,
+      58,
+      60
+    ]
+  },
+  "31": {
+    "name": "Arnoid in pursuit",
+    "rooms": [
+      31
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/031/manifest.json",
+    "artworkViews": [
+      54,
+      58,
+      60
+    ],
+    "castSample": true
+  },
+  "32": {
+    "name": "Monolith Burger menu",
+    "rooms": [
+      280
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/032/manifest.json",
+    "artworkViews": [],
+    "castSample": true
+  },
+  "40": {
+    "name": "Mog elevator entrance",
+    "rooms": [
+      40
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/040/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      61,
+      62,
+      68,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777,
+      853
+    ]
+  },
+  "41": {
+    "name": "Desert plain",
+    "rooms": [
+      41
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/041/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      16,
+      68,
+      71,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777
+    ]
+  },
+  "42": {
+    "name": "Mog’s foot",
+    "rooms": [
+      42
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/042/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      16,
+      67,
+      68,
+      69,
+      71,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777
+    ]
+  },
+  "43": {
+    "name": "Mog monument",
+    "rooms": [
+      43
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/043/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      66,
+      67,
+      68,
+      70,
+      82,
+      84,
+      92,
+      106,
+      107,
+      108,
+      121,
+      123,
+      593,
+      755,
+      777
+    ]
+  },
+  "44": {
+    "name": "Desert sign",
+    "rooms": [
+      44
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/044/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      16,
+      68,
+      69,
+      71,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777
+    ]
+  },
+  "45": {
+    "name": "Sand dunes",
+    "rooms": [
+      45
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/045/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      16,
+      68,
+      69,
+      71,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777
+    ]
+  },
+  "46": {
+    "name": "Steep dunes",
+    "rooms": [
+      46
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/046/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      16,
+      68,
+      69,
+      71,
+      76,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777
+    ]
+  },
+  "47": {
+    "name": "Mog overlook",
+    "rooms": [
+      47
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/047/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      16,
+      68,
+      71,
+      72,
+      76,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777
+    ]
+  },
+  "48": {
+    "name": "Rock formation",
+    "rooms": [
+      48
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/048/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      16,
+      68,
+      69,
+      71,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777
+    ]
+  },
+  "49": {
+    "name": "Phleebhut landing site",
+    "rooms": [
+      49
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/049/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      16,
+      63,
+      68,
+      69,
+      71,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777
+    ],
+    "castSample": true
+  },
+  "50": {
+    "name": "Rock spires",
+    "rooms": [
+      50
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/050/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      16,
+      68,
+      69,
+      71,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777
+    ]
+  },
+  "51": {
+    "name": "Rocky desert",
+    "rooms": [
+      51
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/051/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      16,
+      68,
+      69,
+      71,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777
+    ]
+  },
+  "52": {
+    "name": "Rock overhang",
+    "rooms": [
+      52
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/052/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      16,
+      68,
+      71,
+      78,
+      82,
+      92,
+      104,
+      106,
+      108,
+      120,
+      122,
+      123,
+      593,
+      777
+    ]
+  },
+  "53": {
+    "name": "Snake country",
+    "rooms": [
+      53
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/053/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      16,
+      68,
+      71,
+      77,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777
+    ]
+  },
+  "54": {
+    "name": "Storm plain",
+    "rooms": [
+      54
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/054/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      68,
+      69,
+      79,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777
+    ]
+  },
+  "60": {
+    "name": "Lava field",
+    "rooms": [
+      60
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/060/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      89,
+      94,
+      96
+    ]
+  },
+  "61": {
+    "name": "Ortega trail",
+    "rooms": [
+      61
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/061/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      89,
+      90,
+      94
+    ]
+  },
+  "62": {
+    "name": "Ortega landing site",
+    "rooms": [
+      62
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/062/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      63,
+      89,
+      94
+    ],
+    "castSample": true
+  },
+  "63": {
+    "name": "Ortega trail",
+    "rooms": [
+      63
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/063/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      89,
+      94
+    ]
+  },
+  "64": {
+    "name": "Lava vents",
+    "rooms": [
+      64
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/064/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      89,
+      90,
+      94
+    ]
+  },
+  "65": {
+    "name": "Lava crevice after the collapse",
+    "rooms": [
+      66
+    ],
+    "kind": "variant",
+    "artwork": "art/pictures/065/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      87,
+      89,
+      90,
+      94,
+      95
+    ]
+  },
+  "66": {
+    "name": "Lava crevice",
+    "rooms": [
+      66
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/066/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      87,
+      89,
+      90,
+      94,
+      95
+    ]
+  },
+  "67": {
+    "name": "Volcanic pass",
+    "rooms": [
+      67
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/067/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      89,
+      94
+    ]
+  },
+  "68": {
+    "name": "Volcanic vents",
+    "rooms": [
+      68
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/068/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      89,
+      90,
+      94
+    ]
+  },
+  "69": {
+    "name": "Survey station",
+    "rooms": [
+      69
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/069/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      89,
+      92,
+      93,
+      94
+    ]
+  },
+  "70": {
+    "name": "Volcano base",
+    "rooms": [
+      70
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/070/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      89,
+      94,
+      98
+    ]
+  },
+  "71": {
+    "name": "Volcano slope",
+    "rooms": [
+      71
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/071/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      89,
+      94
+    ]
+  },
+  "72": {
+    "name": "Crater rim",
+    "rooms": [
+      72
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/072/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      89,
+      94
+    ]
+  },
+  "73": {
+    "name": "Generator base",
+    "rooms": [
+      73
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/073/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      68,
+      89,
+      94
+    ]
+  },
+  "74": {
+    "name": "Generator platform",
+    "rooms": [
+      74
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/074/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      68,
+      89,
+      94,
+      97
+    ]
+  },
+  "75": {
+    "name": "Generator summit",
+    "rooms": [
+      75
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/075/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      89,
+      94,
+      99,
+      100
+    ]
+  },
+  "80": {
+    "name": "Pestulon forest",
+    "rooms": [
+      80
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/080/manifest.json",
+    "artworkViews": [
+      0,
+      63,
+      92,
+      123,
+      593
+    ]
+  },
+  "81": {
+    "name": "ScumSoft clearing",
+    "rooms": [
+      81
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/081/manifest.json",
+    "artworkViews": [
+      0,
+      135,
+      777
+    ],
+    "castSample": true
+  },
+  "82": {
+    "name": "ScumSoft through the trees",
+    "rooms": [
+      81
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/082/manifest.json",
+    "artworkViews": [
+      0,
+      135,
+      777
+    ]
+  },
+  "83": {
+    "name": "Departure into deep space",
+    "rooms": [
+      117
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/083/manifest.json",
+    "artworkViews": [
+      54,
+      139
+    ]
+  },
+  "85": {
+    "name": "ScumSoft entrance",
+    "rooms": [
+      85
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/085/manifest.json",
+    "artworkViews": [
+      0,
+      92,
+      113,
+      123,
+      124,
+      134,
+      593
+    ]
+  },
+  "86": {
+    "name": "Security ramp",
+    "rooms": [
+      86
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/086/manifest.json",
+    "artworkViews": [
+      0,
+      113,
+      123,
+      125,
+      134
+    ]
+  },
+  "90": {
+    "name": "Janitor’s closet",
+    "rooms": [
+      90
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/090/manifest.json",
+    "artworkViews": [
+      0,
+      105,
+      109,
+      110,
+      111
+    ]
+  },
+  "91": {
+    "name": "Office corridor",
+    "rooms": [
+      91
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/091/manifest.json",
+    "artworkViews": [
+      0,
+      92,
+      113,
+      114,
+      115,
+      256
+    ]
+  },
+  "92": {
+    "name": "Copier room",
+    "rooms": [
+      92
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/092/manifest.json",
+    "artworkViews": [
+      0,
+      92,
+      103,
+      113,
+      114,
+      115,
+      256
+    ],
+    "castSample": true
+  },
+  "93": {
+    "name": "Executive cubicle",
+    "rooms": [
+      93
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/093/manifest.json",
+    "artworkViews": [
+      0,
+      92,
+      113,
+      114,
+      115,
+      131,
+      132,
+      133,
+      256
+    ]
+  },
+  "94": {
+    "name": "Vehicle bay",
+    "rooms": [
+      94
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/094/manifest.json",
+    "artworkViews": [
+      0,
+      68,
+      102,
+      195,
+      196
+    ]
+  },
+  "95": {
+    "name": "Detention platform",
+    "rooms": [
+      95
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/095/manifest.json",
+    "artworkViews": [
+      0,
+      88,
+      113,
+      114,
+      116,
+      118,
+      126,
+      127,
+      128,
+      210,
+      901
+    ]
+  },
+  "96": {
+    "name": "Robot arena",
+    "rooms": [
+      96
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/096/manifest.json",
+    "artworkViews": [
+      0,
+      130
+    ]
+  },
+  "99": {
+    "name": "Escape from Pestulon",
+    "rooms": [
+      99
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/099/manifest.json",
+    "artworkViews": [
+      101,
+      801
+    ],
+    "castSample": true
+  },
+  "112": {
+    "name": "Approach to Phleebhut",
+    "rooms": [
+      21
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/112/manifest.json",
+    "artworkViews": [
+      52
+    ]
+  },
+  "113": {
+    "name": "Approach to Ortega",
+    "rooms": [
+      21
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/113/manifest.json",
+    "artworkViews": [
+      52
+    ]
+  },
+  "114": {
+    "name": "Approach to Pestulon",
+    "rooms": [
+      21
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/114/manifest.json",
+    "artworkViews": [
+      52
+    ]
+  },
+  "115": {
+    "name": "Earth and Moon",
+    "rooms": [
+      115
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/115/manifest.json",
+    "artworkViews": [
+      52,
+      801
+    ]
+  },
+  "116": {
+    "name": "Sierra headquarters",
+    "rooms": [
+      116
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/116/manifest.json",
+    "artworkViews": [
+      68,
+      136,
+      215
+    ],
+    "castSample": true
+  },
+  "117": {
+    "name": "The Two Guys from Andromeda",
+    "rooms": [
+      116
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/117/manifest.json",
+    "artworkViews": [
+      68,
+      136,
+      215
+    ]
+  },
+  "120": {
+    "name": "Nukem Dukem Robots",
+    "rooms": [
+      120,
+      121
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/120/manifest.json",
+    "artworkViews": [
+      0,
+      68,
+      97,
+      117,
+      194,
+      195,
+      196,
+      198,
+      199,
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209,
+      210,
+      211
+    ]
+  },
+  "121": {
+    "name": "Arena entrance and cinematic backdrop",
+    "rooms": [
+      18,
+      98,
+      121
+    ],
+    "kind": "backdrop",
+    "artwork": "art/pictures/121/manifest.json",
+    "artworkViews": [
+      0,
+      45,
+      46,
+      47,
+      48,
+      51,
+      54,
+      55,
+      68,
+      146,
+      194,
+      199,
+      210
+    ],
+    "castSample": true
+  },
+  "122": {
+    "name": "Arena challenger",
+    "rooms": [
+      121
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/122/manifest.json",
+    "artworkViews": [
+      0,
+      68,
+      194,
+      199,
+      210
+    ]
+  },
+  "150": {
+    "name": "Freighter starfield",
+    "rooms": [
+      1
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/150/manifest.json",
+    "artworkViews": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      601,
+      926
+    ]
+  },
+  "151": {
+    "name": "Freighter crosshairs",
+    "rooms": [
+      1
+    ],
+    "kind": "overlay",
+    "artwork": "art/pictures/151/manifest.json",
+    "artworkViews": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      601,
+      926
+    ]
+  },
+  "152": {
+    "name": "Freighter tracking displays",
+    "rooms": [
+      1
+    ],
+    "kind": "overlay",
+    "artwork": "art/pictures/152/manifest.json",
+    "artworkViews": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      601,
+      926
+    ]
+  },
+  "153": {
+    "name": "Garbage freighter bridge",
+    "rooms": [
+      1
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/153/manifest.json",
+    "artworkViews": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      601,
+      926
+    ]
+  },
+  "154": {
+    "name": "Garbage freighter exterior",
+    "rooms": [
+      1
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/154/manifest.json",
+    "artworkViews": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      601,
+      926
+    ]
+  },
+  "155": {
+    "name": "Sleep chamber",
+    "rooms": [
+      155
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/155/manifest.json",
+    "artworkViews": [
+      8,
+      9
+    ]
+  },
+  "156": {
+    "name": "Sleep chamber alert",
+    "rooms": [
+      155
+    ],
+    "kind": "variant",
+    "artwork": "art/pictures/156/manifest.json",
+    "artworkViews": [
+      8,
+      9
+    ]
+  },
+  "157": {
+    "name": "Debris hollow without power",
+    "rooms": [
+      15
+    ],
+    "kind": "variant",
+    "artwork": "art/pictures/157/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      15,
+      19,
+      29,
+      32,
+      33,
+      34,
+      35,
+      36,
+      258,
+      288
+    ]
+  },
+  "161": {
+    "name": "Status computer boot screen",
+    "rooms": [
+      16
+    ],
+    "kind": "backdrop",
+    "artwork": "art/pictures/161/manifest.json",
+    "artworkViews": [
+      40,
+      42,
+      51
+    ],
+    "castSample": true
+  },
+  "162": {
+    "name": "Mallard side schematic",
+    "rooms": [
+      16
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/162/manifest.json",
+    "artworkViews": [
+      40,
+      42,
+      51
+    ]
+  },
+  "163": {
+    "name": "Mallard top schematic",
+    "rooms": [
+      16
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/163/manifest.json",
+    "artworkViews": [
+      40,
+      42,
+      51
+    ]
+  },
+  "164": {
+    "name": "Mallard interior schematic",
+    "rooms": [
+      16
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/164/manifest.json",
+    "artworkViews": [
+      40,
+      42,
+      51
+    ]
+  },
+  "170": {
+    "name": "Flight controls alternate display",
+    "rooms": [
+      17
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/170/manifest.json",
+    "artworkViews": [
+      41,
+      51,
+      141
+    ]
+  },
+  "180": {
+    "name": "Weapons console alternate display",
+    "rooms": [
+      18
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/180/manifest.json",
+    "artworkViews": [
+      45,
+      46,
+      47,
+      48,
+      51,
+      55,
+      146
+    ]
+  },
+  "191": {
+    "name": "Navigation grid",
+    "rooms": [
+      19
+    ],
+    "kind": "overlay",
+    "artwork": "art/pictures/191/manifest.json",
+    "artworkViews": [
+      49,
+      50,
+      51,
+      212
+    ]
+  },
+  "201": {
+    "name": "Warp sequence I",
+    "rooms": [
+      98
+    ],
+    "kind": "overlay",
+    "artwork": "art/pictures/201/manifest.json",
+    "artworkViews": [
+      54
+    ]
+  },
+  "202": {
+    "name": "Warp sequence II",
+    "rooms": [
+      98
+    ],
+    "kind": "overlay",
+    "artwork": "art/pictures/202/manifest.json",
+    "artworkViews": [
+      54
+    ]
+  },
+  "203": {
+    "name": "Warp sequence III",
+    "rooms": [
+      98
+    ],
+    "kind": "overlay",
+    "artwork": "art/pictures/203/manifest.json",
+    "artworkViews": [
+      54
+    ]
+  },
+  "204": {
+    "name": "Warp sequence IV",
+    "rooms": [
+      98
+    ],
+    "kind": "overlay",
+    "artwork": "art/pictures/204/manifest.json",
+    "artworkViews": [
+      54
+    ]
+  },
+  "205": {
+    "name": "Warp sequence V",
+    "rooms": [
+      98
+    ],
+    "kind": "overlay",
+    "artwork": "art/pictures/205/manifest.json",
+    "artworkViews": [
+      54
+    ]
+  },
+  "206": {
+    "name": "Warp sequence VI",
+    "rooms": [
+      98
+    ],
+    "kind": "overlay",
+    "artwork": "art/pictures/206/manifest.json",
+    "artworkViews": [
+      54
+    ]
+  },
+  "207": {
+    "name": "Warp sequence VII",
+    "rooms": [
+      98
+    ],
+    "kind": "overlay",
+    "artwork": "art/pictures/207/manifest.json",
+    "artworkViews": [
+      54
+    ]
+  },
+  "290": {
+    "name": "Astro Chicken cabinet",
+    "rooms": [
+      290
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/290/manifest.json",
+    "artworkViews": [
+      290,
+      291
+    ]
+  },
+  "291": {
+    "name": "Astro Chicken title",
+    "rooms": [
+      290
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/291/manifest.json",
+    "artworkViews": [
+      290,
+      291
+    ],
+    "castSample": true
+  },
+  "292": {
+    "name": "Astro Chicken landing pad",
+    "rooms": [
+      290
+    ],
+    "kind": "graphic",
+    "artwork": "art/pictures/292/manifest.json",
+    "artworkViews": [
+      290,
+      291
+    ]
+  },
+  "300": {
+    "name": "Alternate navigation grid",
+    "rooms": [
+      19
+    ],
+    "kind": "overlay",
+    "artwork": "art/pictures/300/manifest.json",
+    "artworkViews": [
+      49,
+      50,
+      51,
+      212
+    ]
+  },
+  "420": {
+    "name": "Mog elevator",
+    "rooms": [
+      420
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/420/manifest.json",
+    "artworkViews": [
+      0,
+      83,
+      777
+    ]
+  },
+  "421": {
+    "name": "Mog machinery",
+    "rooms": [
+      421
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/421/manifest.json",
+    "artworkViews": [
+      0,
+      83,
+      94,
+      106,
+      108,
+      119,
+      120,
+      777
+    ]
+  },
+  "430": {
+    "name": "Arnoid ambush",
+    "rooms": [
+      43
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/430/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      66,
+      67,
+      68,
+      70,
+      82,
+      84,
+      92,
+      106,
+      107,
+      108,
+      121,
+      123,
+      593,
+      755,
+      777
+    ]
+  },
+  "470": {
+    "name": "World O’ Wonders",
+    "rooms": [
+      470
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/470/manifest.json",
+    "artworkViews": [
+      73,
+      74,
+      80,
+      81
+    ]
+  },
+  "540": {
+    "name": "Desert lightning",
+    "rooms": [
+      54
+    ],
+    "kind": "overlay",
+    "artwork": "art/pictures/540/manifest.json",
+    "artworkViews": [
+      0,
+      6,
+      68,
+      69,
+      79,
+      82,
+      92,
+      106,
+      108,
+      123,
+      593,
+      777
+    ]
+  },
+  "690": {
+    "name": "Observation scope",
+    "rooms": [
+      690
+    ],
+    "kind": "painted",
+    "artwork": "art/pictures/690/manifest.json",
+    "artworkViews": [
+      91
+    ]
+  },
+  "777": {
+    "name": "Startup",
+    "rooms": [
+      155,
+      777
+    ],
+    "kind": "backdrop",
+    "artwork": "art/pictures/777/manifest.json",
+    "artworkViews": [
+      8,
+      9,
+      778
+    ]
+  },
+  "900": {
+    "name": "Sierra opening animation",
+    "rooms": [
+      900
+    ],
+    "kind": "backdrop",
+    "artwork": "art/pictures/900/manifest.json",
+    "artworkViews": [
+      900
+    ],
+    "castSample": true
+  },
+  "926": {
+    "name": "The Pirates of Pestulon lettering",
+    "rooms": [
+      1
+    ],
+    "kind": "overlay",
+    "artwork": "art/pictures/926/manifest.json",
+    "artworkViews": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      601,
+      926
+    ]
+  }
+}

@@ -1,0 +1,543 @@
+{
+  "room": 900,
+  "picture": 900,
+  "screen": [
+    320,
+    200
+  ],
+  "objects": [
+    {
+      "name": "logo0",
+      "view": 900,
+      "loop": 0,
+      "cel": 0,
+      "priority": 15,
+      "bounds": [
+        102,
+        22,
+        214,
+        28
+      ]
+    },
+    {
+      "name": "shadow0",
+      "view": 900,
+      "loop": 1,
+      "cel": 0,
+      "priority": 0,
+      "bounds": [
+        110,
+        25,
+        222,
+        31
+      ]
+    },
+    {
+      "name": "logo1",
+      "view": 900,
+      "loop": 0,
+      "cel": 1,
+      "priority": 15,
+      "bounds": [
+        102,
+        28,
+        214,
+        34
+      ]
+    },
+    {
+      "name": "shadow1",
+      "view": 900,
+      "loop": 1,
+      "cel": 1,
+      "priority": 0,
+      "bounds": [
+        111,
+        31,
+        223,
+        37
+      ]
+    },
+    {
+      "name": "logo2",
+      "view": 900,
+      "loop": 0,
+      "cel": 2,
+      "priority": 15,
+      "bounds": [
+        103,
+        34,
+        215,
+        40
+      ]
+    },
+    {
+      "name": "shadow2",
+      "view": 900,
+      "loop": 1,
+      "cel": 2,
+      "priority": 0,
+      "bounds": [
+        111,
+        37,
+        223,
+        43
+      ]
+    },
+    {
+      "name": "logo3",
+      "view": 900,
+      "loop": 0,
+      "cel": 3,
+      "priority": 15,
+      "bounds": [
+        102,
+        40,
+        214,
+        46
+      ]
+    },
+    {
+      "name": "shadow3",
+      "view": 900,
+      "loop": 1,
+      "cel": 3,
+      "priority": 0,
+      "bounds": [
+        110,
+        43,
+        222,
+        49
+      ]
+    },
+    {
+      "name": "logo4",
+      "view": 900,
+      "loop": 0,
+      "cel": 4,
+      "priority": 15,
+      "bounds": [
+        102,
+        46,
+        214,
+        52
+      ]
+    },
+    {
+      "name": "shadow4",
+      "view": 900,
+      "loop": 1,
+      "cel": 4,
+      "priority": 1,
+      "bounds": [
+        110,
+        49,
+        222,
+        55
+      ]
+    },
+    {
+      "name": "logo5",
+      "view": 900,
+      "loop": 0,
+      "cel": 5,
+      "priority": 15,
+      "bounds": [
+        102,
+        52,
+        214,
+        58
+      ]
+    },
+    {
+      "name": "shadow5",
+      "view": 900,
+      "loop": 1,
+      "cel": 5,
+      "priority": 1,
+      "bounds": [
+        110,
+        55,
+        222,
+        61
+      ]
+    },
+    {
+      "name": "logo6",
+      "view": 900,
+      "loop": 0,
+      "cel": 6,
+      "priority": 15,
+      "bounds": [
+        102,
+        58,
+        214,
+        64
+      ]
+    },
+    {
+      "name": "shadow6",
+      "view": 900,
+      "loop": 1,
+      "cel": 6,
+      "priority": 2,
+      "bounds": [
+        110,
+        61,
+        222,
+        67
+      ]
+    },
+    {
+      "name": "logo7",
+      "view": 900,
+      "loop": 0,
+      "cel": 7,
+      "priority": 15,
+      "bounds": [
+        102,
+        64,
+        214,
+        70
+      ]
+    },
+    {
+      "name": "shadow7",
+      "view": 900,
+      "loop": 1,
+      "cel": 7,
+      "priority": 2,
+      "bounds": [
+        111,
+        67,
+        223,
+        73
+      ]
+    },
+    {
+      "name": "logo8",
+      "view": 900,
+      "loop": 0,
+      "cel": 8,
+      "priority": 15,
+      "bounds": [
+        102,
+        70,
+        214,
+        76
+      ]
+    },
+    {
+      "name": "shadow8",
+      "view": 900,
+      "loop": 1,
+      "cel": 8,
+      "priority": 3,
+      "bounds": [
+        110,
+        73,
+        222,
+        79
+      ]
+    },
+    {
+      "name": "logo9",
+      "view": 900,
+      "loop": 2,
+      "cel": 0,
+      "priority": 15,
+      "bounds": [
+        102,
+        76,
+        214,
+        82
+      ]
+    },
+    {
+      "name": "shadow9",
+      "view": 900,
+      "loop": 3,
+      "cel": 0,
+      "priority": 4,
+      "bounds": [
+        110,
+        79,
+        222,
+        85
+      ]
+    },
+    {
+      "name": "logo10",
+      "view": 900,
+      "loop": 2,
+      "cel": 1,
+      "priority": 15,
+      "bounds": [
+        102,
+        82,
+        214,
+        88
+      ]
+    },
+    {
+      "name": "shadow10",
+      "view": 900,
+      "loop": 3,
+      "cel": 1,
+      "priority": 4,
+      "bounds": [
+        110,
+        85,
+        222,
+        91
+      ]
+    },
+    {
+      "name": "logo11",
+      "view": 900,
+      "loop": 2,
+      "cel": 2,
+      "priority": 15,
+      "bounds": [
+        102,
+        88,
+        214,
+        94
+      ]
+    },
+    {
+      "name": "shadow11",
+      "view": 900,
+      "loop": 3,
+      "cel": 2,
+      "priority": 5,
+      "bounds": [
+        110,
+        91,
+        222,
+        97
+      ]
+    },
+    {
+      "name": "logo12",
+      "view": 900,
+      "loop": 2,
+      "cel": 3,
+      "priority": 15,
+      "bounds": [
+        102,
+        94,
+        214,
+        100
+      ]
+    },
+    {
+      "name": "shadow12",
+      "view": 900,
+      "loop": 3,
+      "cel": 3,
+      "priority": 5,
+      "bounds": [
+        110,
+        97,
+        222,
+        103
+      ]
+    },
+    {
+      "name": "logo13",
+      "view": 900,
+      "loop": 2,
+      "cel": 4,
+      "priority": 15,
+      "bounds": [
+        104,
+        100,
+        216,
+        106
+      ]
+    },
+    {
+      "name": "shadow13",
+      "view": 900,
+      "loop": 3,
+      "cel": 4,
+      "priority": 6,
+      "bounds": [
+        110,
+        103,
+        222,
+        109
+      ]
+    },
+    {
+      "name": "logo14",
+      "view": 900,
+      "loop": 2,
+      "cel": 5,
+      "priority": 15,
+      "bounds": [
+        102,
+        106,
+        214,
+        112
+      ]
+    },
+    {
+      "name": "shadow14",
+      "view": 900,
+      "loop": 3,
+      "cel": 5,
+      "priority": 6,
+      "bounds": [
+        110,
+        109,
+        222,
+        115
+      ]
+    },
+    {
+      "name": "logo15",
+      "view": 900,
+      "loop": 2,
+      "cel": 6,
+      "priority": 15,
+      "bounds": [
+        102,
+        112,
+        214,
+        118
+      ]
+    },
+    {
+      "name": "shadow15",
+      "view": 900,
+      "loop": 3,
+      "cel": 6,
+      "priority": 7,
+      "bounds": [
+        110,
+        115,
+        222,
+        121
+      ]
+    },
+    {
+      "name": "logo16",
+      "view": 900,
+      "loop": 2,
+      "cel": 7,
+      "priority": 15,
+      "bounds": [
+        102,
+        118,
+        214,
+        124
+      ]
+    },
+    {
+      "name": "shadow16",
+      "view": 900,
+      "loop": 3,
+      "cel": 7,
+      "priority": 8,
+      "bounds": [
+        110,
+        121,
+        222,
+        127
+      ]
+    },
+    {
+      "name": "theS",
+      "view": 900,
+      "loop": 4,
+      "cel": 5,
+      "priority": 9,
+      "bounds": [
+        63,
+        128,
+        92,
+        160
+      ]
+    },
+    {
+      "name": "theI",
+      "view": 900,
+      "loop": 5,
+      "cel": 5,
+      "priority": 9,
+      "bounds": [
+        97,
+        130,
+        107,
+        160
+      ]
+    },
+    {
+      "name": "theE",
+      "view": 900,
+      "loop": 6,
+      "cel": 5,
+      "priority": 9,
+      "bounds": [
+        114,
+        130,
+        141,
+        160
+      ]
+    },
+    {
+      "name": "theR1",
+      "view": 900,
+      "loop": 7,
+      "cel": 5,
+      "priority": 9,
+      "bounds": [
+        148,
+        130,
+        179,
+        160
+      ]
+    },
+    {
+      "name": "theR2",
+      "view": 900,
+      "loop": 7,
+      "cel": 5,
+      "priority": 9,
+      "bounds": [
+        186,
+        130,
+        217,
+        160
+      ]
+    },
+    {
+      "name": "theA",
+      "view": 900,
+      "loop": 8,
+      "cel": 5,
+      "priority": 9,
+      "bounds": [
+        222,
+        130,
+        255,
+        160
+      ]
+    },
+    {
+      "name": "presents",
+      "view": 900,
+      "loop": 9,
+      "cel": 0,
+      "priority": 13,
+      "bounds": [
+        108,
+        169,
+        215,
+        186
+      ]
+    }
+  ]
+}

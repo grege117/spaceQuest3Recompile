@@ -1,0 +1,62 @@
+{
+  "room": 99,
+  "picture": 99,
+  "screen": [
+    320,
+    200
+  ],
+  "objects": [
+    {
+      "name": "SpiralStar",
+      "view": 101,
+      "loop": 1,
+      "cel": 3,
+      "priority": 14,
+      "bounds": [
+        193,
+        57,
+        202,
+        64
+      ]
+    },
+    {
+      "name": "SpiralStar",
+      "view": 101,
+      "loop": 0,
+      "cel": 0,
+      "priority": 13,
+      "bounds": [
+        296,
+        154,
+        301,
+        159
+      ]
+    },
+    {
+      "name": "SpiralStar",
+      "view": 101,
+      "loop": 0,
+      "cel": 0,
+      "priority": 13,
+      "bounds": [
+        20,
+        154,
+        25,
+        159
+      ]
+    },
+    {
+      "name": "SpiralStar",
+      "view": 101,
+      "loop": 0,
+      "cel": 0,
+      "priority": 13,
+      "bounds": [
+        170,
+        250,
+        175,
+        255
+      ]
+    }
+  ]
+}

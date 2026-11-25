@@ -1,0 +1,36 @@
+{
+  "room": 19,
+  "picture": 19,
+  "screen": [
+    320,
+    200
+  ],
+  "objects": [
+    {
+      "name": "scanBox",
+      "view": 50,
+      "loop": 0,
+      "cel": 0,
+      "priority": 13,
+      "bounds": [
+        59,
+        141,
+        85,
+        160
+      ]
+    },
+    {
+      "name": "you",
+      "view": 50,
+      "loop": 4,
+      "cel": 0,
+      "priority": 14,
+      "bounds": [
+        72,
+        134,
+        97,
+        151
+      ]
+    }
+  ]
+}

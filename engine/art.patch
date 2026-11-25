@@ -1,0 +1,169 @@
+--- a/engines/sci/graphics/paint16.cpp
++++ b/engines/sci/graphics/paint16.cpp
+@@ -19,6 +19,7 @@
+  *
+  */
+ 
++#include <emscripten/em_asm.h>
+ #include "sci/sci.h"
+ #include "sci/engine/features.h"
+ #include "sci/engine/state.h"
+@@ -77,6 +78,56 @@
+ 
+ 	picture->draw(mirroredFlag, addToFlag, paletteId);
+ 	delete picture;
++	if (!addToFlag && g_sci->getGameId() == GID_SQ3) {
++		// The picture is complete here, before any AddToPic or animated cels.
++		Common::Rect area = _ports->getPort()->rect;
++		_ports->offsetRect(area);
++		area.clip(Common::Rect(_screen->getWidth(), _screen->getHeight()));
++		const int width = area.width(), height = area.height();
++		const int count = EM_ASM_INT({ return window.sq3Artwork.exportViewCount($0); }, pictureId);
++		if (count > 0) {
++			Common::Array<byte> planes(width * height * 3);
++			for (int y = 0; y < height; ++y) {
++				for (int x = 0; x < width; ++x) {
++					int i = 3 * (y * width + x);
++					int sx = area.left + x, sy = area.top + y;
++					planes[i] = _screen->getVisual(sx, sy);
++					planes[i + 1] = _screen->getPriority(sx, sy);
++					planes[i + 2] = _screen->getControl(sx, sy);
++				}
++			}
++			EM_ASM({ window.sq3Artwork.sourcePicture($5, $0, $1, $2, $3,
++				HEAPU8.slice($4, $4 + $2 * $3 * 3)); }, area.left, area.top, width, height, planes.data(), pictureId);
++			for (int i = 0; i < count; ++i) {
++				const int id = EM_ASM_INT({ return window.sq3Artwork.exportViews[$0]; }, i);
++				GfxView *view = _cache->getView(id);
++				for (int l = 0; l < view->getLoopCount(); ++l) {
++					for (int c = 0; c < view->getCelCount(l); ++c) {
++						const CelInfo *cel = view->getCelInfo(l, c);
++						const byte *pixels = view->getBitmap(l, c).getUnsafeDataAt(0, cel->width * cel->height);
++						EM_ASM({ window.sq3Artwork.sourceCel($0, $1, $2, $3, $4, $5, $6, $7,
++							HEAPU8.slice($8, $8 + $3 * $4)); }, id, l, c, cel->width, cel->height,
++							cel->displaceX, cel->displaceY, cel->clearKey, pixels);
++					}
++				}
++			}
++		}
++		// Replace only display pixels. SCI retains its original visual, priority,
++		// and control buffers for flood fills, hit tests and sprite occlusion.
++		const bool wasActive = EM_ASM_INT({ return !!window.sq3Artwork.active; });
++		bool active = EM_ASM_INT({ return window.sq3Artwork.select($0, $1, $2); },
++			pictureId, width, height);
++		if (active) {
++			Common::Array<byte> pixels(width * height);
++			EM_ASM({ HEAPU8.set(window.sq3Artwork.background, $0); }, pixels.data());
++			for (int y = 0; y < height; ++y)
++				for (int x = 0; x < width; ++x)
++					_screen->putPixelOnDisplay(area.left + x, area.top + y, pixels[y * width + x]);
++		}
++		if (active || wasActive)
++			_palette->setOnScreen(false);
++	}
++
+ 
+ 	// We make a call to SciPalette here, for increasing sys timestamp and also loading targetpalette, if palvary active
+ 	//  (SCI1.1 only)
+--- a/engines/sci/graphics/palette.cpp
++++ b/engines/sci/graphics/palette.cpp
+@@ -24,6 +24,7 @@
+ #include "common/util.h"
+ #include "common/system.h"
+ 
++#include <emscripten/em_asm.h>
+ #include "sci/sci.h"
+ #include "sci/engine/state.h"
+ #include "sci/graphics/cache.h"
+@@ -506,6 +507,8 @@
+ 	if (g_sci->_gfxRemap16)
+ 		g_sci->_gfxRemap16->updateRemapping();
+ 
++	if (g_sci->getGameId() == GID_SQ3)
++		EM_ASM({ if (window.sq3Artwork.active) HEAPU8.set(window.sq3Artwork.colors, $0 + 48); }, bpal);
+ 	_screen->setPalette(bpal, 0, 256, update);
+ }
+ 
+--- a/engines/sci/graphics/view.cpp
++++ b/engines/sci/graphics/view.cpp
+@@ -19,6 +19,7 @@
+  *
+  */
+ 
++#include <emscripten/em_asm.h>
+ #include "sci/sci.h"
+ #include "sci/engine/state.h"
+ #include "sci/graphics/gfxdrivers.h"
+@@ -811,6 +812,24 @@
+ 		return;
+ 	}
+ 
++	// Replacement cels share the SCI dimensions and silhouette. Keep the
++	// original transparency and priority tests and replace only accepted pixels.
++	Common::Array<byte> replacement;
++	if (EM_ASM_INT({ return !!window.sq3Artwork.active; })) {
++		replacement.resize(celWidth * celHeight);
++		if (!EM_ASM_INT({
++			const cel = window.sq3Artwork.cel($0, $1, $2, $3, $4);
++			if (!cel) return 0;
++			HEAPU8.set(cel, $5);
++			return 1;
++		}, _resourceId, loopNo, celNo, celWidth, celHeight, replacement.data()))
++			replacement.clear();
++	}
++	auto paintReplacement = [&](int x, int y) {
++		if (!replacement.empty())
++			_screen->putPixelOnDisplay(clipRectTranslated.left + x, clipRectTranslated.top + y,
++				replacement[(clipRect.top - rect.top + y) * celWidth + clipRect.left - rect.left + x]);
++	};
+ 	const byte *bitmapData = bitmap.getUnsafeDataAt((clipRect.top - rect.top) * celWidth + (clipRect.left - rect.left), celWidth * (height - 1) + width);
+ 
+ 	// Set up custom per-view palette mod
+@@ -824,8 +843,10 @@
+ 				const byte color = EGAmapping[bitmapData[x]];
+ 				const int x2 = clipRectTranslated.left + x;
+ 				const int y2 = clipRectTranslated.top + y;
+-				if (color != clearKey && priority >= _screen->getPriority(x2, y2))
++				if (color != clearKey && priority >= _screen->getPriority(x2, y2)) {
+ 					_screen->putPixel(x2, y2, drawMask, color, priority, 0);
++					paintReplacement(x, y);
++				}
+ 			}
+ 		}
+ 	} else if (upscaledHires) {
+@@ -840,6 +861,7 @@
+ 					const int y2 = clipRectTranslated.top + y;
+ 					if (priority >= _screen->getPriority(x2, y2)) {
+ 						_screen->putPixel(x2, y2, drawMask, getMappedColor(color, scaleSignal, palette, x2, y2), priority, 0);
++						paintReplacement(x, y);
+ 					}
+ 				}
+ 			}
+--- a/engines/sci/graphics/screen.h
++++ b/engines/sci/graphics/screen.h
+@@ -76,6 +76,7 @@
+ 	uint16 getHeight() { return _height; }
+ 	uint16 getScriptWidth() { return _scriptWidth; }
+ 	uint16 getScriptHeight() { return _scriptHeight; }
++	const byte *getDisplayPixels() const { return _displayScreen; }
+ 	uint16 getDisplayWidth() { return _displayWidth; }
+ 	uint16 getDisplayHeight() { return _displayHeight; }
+ 	byte getColorWhite() { return _colorWhite; }
+--- a/engines/sci/graphics/animate.cpp
++++ b/engines/sci/graphics/animate.cpp
+@@ -521,6 +521,15 @@
+ 				it->signal |= kSignalRemoveView;
+ 		}
+ 	}
++	// Copy the same animation pass that the existing SCI layer export describes.
++	if (g_sci->getGameId() == GID_SQ3 && EM_ASM_INT({ return !!window.sq3.captureRequested; })) {
++		byte palette[768];
++		_screen->grabPalette(palette, 0, 256);
++		EM_ASM({
++			window.sq3Artwork.captureDisplay($1, $2, HEAPU8.subarray($0, $0 + $1 * $2),
++				HEAPU8.subarray($3, $3 + 768));
++		}, _screen->getDisplayPixels(), _screen->getDisplayWidth(), _screen->getDisplayHeight(), palette);
++	}
+ 	// use this for debug purposes
+ 	// _screen->copyToScreen();
+ }

@@ -1,0 +1,48 @@
+{
+  "room": 2,
+  "screen": [
+    320,
+    200
+  ],
+  "objects": [
+    {
+      "name": "door",
+      "view": 12,
+      "loop": 1,
+      "cel": 0,
+      "priority": 9,
+      "bounds": [
+        120,
+        93,
+        157,
+        126
+      ]
+    },
+    {
+      "name": "ego",
+      "view": 0,
+      "loop": 2,
+      "cel": 0,
+      "priority": 10,
+      "bounds": [
+        136,
+        121,
+        151,
+        154
+      ]
+    },
+    {
+      "name": "motivator",
+      "view": 36,
+      "loop": 0,
+      "cel": 0,
+      "priority": 13,
+      "bounds": [
+        172,
+        167,
+        193,
+        180
+      ]
+    }
+  ]
+}

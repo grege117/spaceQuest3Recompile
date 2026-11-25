@@ -1,0 +1,160 @@
+--- a/engines/sci/engine/kevent.cpp
++++ b/engines/sci/engine/kevent.cpp
+@@ -39,6 +39,8 @@
+ #include "sci/graphics/frameout.h"
+ #endif
+ 
++#include <emscripten/em_asm.h>
++
+ namespace Sci {
+ 
+ reg_t kGetEvent(EngineState *s, int argc, reg_t *argv) {
+@@ -48,6 +50,23 @@
+ 	uint16 modifiers = 0;
+ 	SegManager *segMan = s->_segMan;
+ 	Common::Point mousePos;
++
++	// Only User::doit reads uEvt. Other event loops belong to menus,
++	// cutscenes and dialogs, which must retain their own keyboard handling.
++	if (g_sci->getGameId() == GID_SQ3 && !(mask & kSciEventPeek)) {
++		bool input = (mask & kSciEventKeyDown) &&
++			Common::String(segMan->getObjectName(obj)) == "uEvt" &&
++			readSelectorValue(segMan, s->xs->objp, SELECTOR(canInput));
++		int room = s->variables[VAR_GLOBAL][kGlobalVarCurrentRoomNo].getOffset();
++		// The game keeps the warp motivator's location in global 149.
++		bool motivatorHere = s->variablesMax[VAR_GLOBAL] > 149 && room > 0 &&
++			s->variables[VAR_GLOBAL][149].getOffset() == room;
++		int key = EM_ASM_INT({
++			return window.sq3.poll($0, !!$1, !!$2);
++		}, room, input, motivatorHere);
++		if (input && key)
++			g_debug_simulated_key = key;
++	}
+ 
+ 	// If there's a simkey pending, and the game wants a keyboard event, use the
+ 	// simkey instead of a normal event
+--- a/engines/sci/engine/vm.cpp
++++ b/engines/sci/engine/vm.cpp
+@@ -37,6 +37,8 @@
+ #include "sci/engine/workarounds.h"
+ #include "sci/engine/scriptdebug.h"
+ 
++#include <emscripten/em_asm.h>
++
+ namespace Sci {
+ 
+ const reg_t NULL_REG = {0, 0};
+@@ -183,6 +185,46 @@
+ #define POP32() (*(validate_stack_addr(s, --(s->xs->sp))))
+ 
+ ExecStack *execute_method(EngineState *s, uint16 script, uint16 pubfunct, StackPtr sp, reg_t calling_obj, uint16 argc, StackPtr argp) {
++	// SQ3 1.018, Interface script 255 exports Print (0) and GetInput (2).
++	// The User script still calls Parse and dispatches said: to room objects.
++	if (g_sci->getGameId() == GID_SQ3 && script == 255) {
++		if (pubfunct == 2 && argc >= 2 &&
++		    s->_segMan->getScript(s->xs->addr.pc.getSegment())->getScriptNumber() == 996) {
++			char line[46];
++			const int capacity = MIN<int>(argp[2].getOffset(), sizeof(line) - 1) + 1;
++			int length = EM_ASM_INT({
++				const line = window.sq3.takeCommand();
++				if (!line || line.length >= $1) return 0;
++				stringToUTF8(line, $0, $1);
++				return line.length;
++			}, line, capacity);
++			if (length) {
++				s->_segMan->strcpy_(argp[1], line);
++				s->r_acc = make_reg(0, length);
++				return nullptr;
++			}
++		}
++		if (pubfunct == 0 && argc >= 1) {
++			// Handle text-only Print calls. Timers, icons, editing, choices
++			// and dialogs returning object handles keep their SCI semantics.
++			bool pointer = argp[1].getSegment() != 0;
++			uint i = pointer ? 2 : 3;
++			bool plain = i <= uint(argc + 1);
++			while (plain && i <= argc) {
++				switch (argp[i++].getOffset()) {
++				case 30: case 33: case 70: ++i; break; // mode, font, width
++				case 67: i += 2; break;                // position
++				default: plain = false;
++				}
++			}
++			if (plain && i == uint(argc + 1)) {
++				Common::String text = g_sci->getKernel()->lookupText(argp[1], pointer ? 0 : argp[2].getOffset());
++				EM_ASM({ window.sq3.speech(sq3DosText($0)); }, text.c_str());
++				s->r_acc = TRUE_REG;
++				return nullptr;
++			}
++		}
++	}
+ 	int seg = s->_segMan->getScriptSegment(script);
+ 	Script *scr = s->_segMan->getScriptIfLoaded(seg);
+ 
+--- a/engines/sci/engine/kgraphics.cpp
++++ b/engines/sci/engine/kgraphics.cpp
+@@ -56,6 +56,8 @@
+ #include "sci/graphics/text32.h"
+ #endif
+ 
++#include <emscripten/em_asm.h>
++
+ namespace Sci {
+ 
+ static int16 adjustGraphColor(int16 color) {
+@@ -932,6 +934,8 @@
+ 		return;
+ 
+ 	case SCI_CONTROLS_TYPE_TEXT:
++		if (g_sci->getGameId() == GID_SQ3 && !hilite && !splitText.empty())
++			EM_ASM({ window.sq3.dialog(sq3DosText($0)); }, splitText.c_str());
+ 		alignment = readSelectorValue(s->_segMan, controlObject, SELECTOR(mode));
+ 		debugC(kDebugLevelGraphics, "drawing text %04x:%04x ('%s') to %d,%d, mode=%d", PRINT_REG(controlObject), text.c_str(), x, y, alignment);
+ 		g_sci->_gfxControls16->kernelDrawText(rect, controlObject, splitText.c_str(), languageSplitter, fontId, alignment, style, hilite);
+--- a/engines/sci/graphics/animate.cpp
++++ b/engines/sci/graphics/animate.cpp
+@@ -41,6 +41,8 @@
+ #include "sci/graphics/screen.h"
+ #include "sci/graphics/transitions.h"
+ #include "sci/graphics/animate.h"
++
++#include <emscripten/em_asm.h>
+ 
+ namespace Sci {
+ 
+@@ -699,6 +701,35 @@
+ 		animateShowPic();
+ 
+ 	updateScreen(old_picNotValid);
++	// Optional annotations from the same animation pass as the visible cels.
++	if (g_sci->getGameId() == GID_SQ3 && EM_ASM_INT({ return !!window.sq3.captureRequested; })) {
++		EM_ASM({ window.sq3.beginFrame($0); }, _s->currentRoomNumber());
++		for (const auto &entry : _list) {
++			if (entry.signal & kSignalHidden)
++				continue;
++			Common::Rect bounds = entry.celRect;
++			_ports->offsetRect(bounds);
++			EM_ASM({
++				window.sq3.addObject(sq3DosText($0), $1, $2, $3, $4, $5, $6, $7, $8);
++			}, _s->_segMan->getObjectName(entry.object), entry.viewId, entry.loopNo,
++			   entry.celNo, entry.priority, bounds.left, bounds.top, bounds.right, bounds.bottom);
++		}
++		// The scene planes are still composited here, before restoreAndDelete.
++		int width = _screen->getWidth();
++		int height = _screen->getHeight();
++		Common::Array<byte> pixels(width * height * 3);
++		for (int y = 0; y < height; ++y) {
++			for (int x = 0; x < width; ++x) {
++				int offset = 3 * (y * width + x);
++				pixels[offset] = _screen->getVisual(x, y);
++				pixels[offset + 1] = _screen->getPriority(x, y);
++				pixels[offset + 2] = _screen->getControl(x, y);
++			}
++		}
++		EM_ASM({
++			window.sq3.endFrame($1, $2, HEAPU8.subarray($0, $0 + $1 * $2 * 3));
++		}, pixels.data(), width, height);
++	}
+ 	restoreAndDelete(argc, argv);
+ 
+ 	// We update the screen here as well, some scenes like EQ1 credits run w/o calling kGetEvent thus we wouldn't update

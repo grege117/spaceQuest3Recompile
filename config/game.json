@@ -1,0 +1,846 @@
+{
+  "resources": [
+    "RESOURCE.MAP",
+    "RESOURCE.001",
+    "RESOURCE.002",
+    "RESOURCE.003",
+    "VERSION",
+    "ADL.DRV",
+    "SNDBLAST.DRV"
+  ],
+  "target": "sci:sq3",
+  "musicDriver": "adlib",
+  "hintCommand": "hint",
+  "defaultHints": [
+    "Try LOOK for Roger’s description of this place.",
+    "Examine a specific object from the description, then move close to it before trying an action."
+  ],
+  "rooms": {
+    "1": {
+      "name": "Garbage freighter",
+      "intro": true,
+      "hints": [
+        "Watch the freighter collect Roger’s pod, or click the scene to skip ahead."
+      ]
+    },
+    "2": {
+      "name": "Junk bay",
+      "artwork": "art/junk-bay/manifest.json",
+      "templates": [
+        {
+          "name": "Escape pod upper hull",
+          "minAgreement": 0.96,
+          "rows": [
+            "000000ffffffff077770ff7ffff7000f",
+            "000fffffffffff0777770ff77fff77ff",
+            "70fffffffffffff0777770ff77ffff7f",
+            "70ffffffffffffff0777770ff77ffff7",
+            "70ffffffffffffff07777770ff77ffff",
+            "70fffffffffffffff07777770ff77fff",
+            "770fffffffffffffff07777770ff777f",
+            "770fffffffffffffff077777770ff777",
+            "770ffffffffffffffff077777770ff77",
+            "770fffffffffffffffff077777770fff",
+            "770fffffffffffffffff0777777770ff",
+            "770ffffffffffffffffff0777777770f",
+            "770fffffffffffffffff000000000000"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "when": {
+            "motivatorHere": false
+          },
+          "hints": [
+            "The heavy object has moved. Look for it where the grabber last released its load.",
+            "The passage east and the scrap to the south both lead farther into the freighter."
+          ]
+        }
+      ],
+      "hints": [
+        "The pod has finished its journey. Look at the floor around it.",
+        "Examine the small object on the floor. If it proves too heavy, remember where you saw it."
+      ],
+      "artworkViews": [
+        0,
+        6,
+        11,
+        12,
+        36,
+        258
+      ],
+      "walkEntry": {
+        "from": 3,
+        "x": 170,
+        "y": 155
+      }
+    },
+    "3": {
+      "name": "Scrap heap",
+      "hints": [
+        "Look at the space between the wrecks. Some of the scrap conceals a way through.",
+        "A ladder can go with you. Try taking it when you’re beside it."
+      ],
+      "artwork": "art/scrap-heap/manifest.json",
+      "artworkViews": [
+        0,
+        6,
+        36,
+        193,
+        258
+      ],
+      "walkEntry": {
+        "from": 2,
+        "x": 128,
+        "y": 95
+      }
+    },
+    "4": {
+      "name": "Bucket conveyor",
+      "hints": [
+        "Watch where the buckets go. They carry scrap to a higher level.",
+        "Stand near a bucket and try getting into it. Be ready to move at the top."
+      ],
+      "artwork": "art/bucket-conveyor/manifest.json",
+      "artworkViews": [
+        0,
+        6,
+        13,
+        36,
+        258
+      ],
+      "walkEntry": {
+        "from": 3,
+        "x": 178,
+        "y": 137
+      }
+    },
+    "5": {
+      "name": "Tanker wreck",
+      "hints": [
+        "The dark passage through the tanker is worth exploring. Look inside."
+      ],
+      "artwork": "art/tanker-wreck/manifest.json",
+      "artworkViews": [
+        0,
+        6,
+        36,
+        258
+      ],
+      "walkEntry": {
+        "from": 2,
+        "x": 60,
+        "y": 140
+      }
+    },
+    "6": {
+      "name": "Tanker interior",
+      "hints": [
+        "Inspect the frayed wiring on the wall.",
+        "Get close to the one usable wire and take it."
+      ],
+      "artwork": "art/tanker-interior/manifest.json",
+      "artworkViews": [
+        0,
+        7,
+        15,
+        18,
+        192,
+        751
+      ],
+      "walkEntry": {
+        "from": 5,
+        "x": 20,
+        "y": 147
+      }
+    },
+    "7": {
+      "name": "Robot head",
+      "hints": [
+        "Examine the metal head among the wrecks. Look for a way into it."
+      ],
+      "artwork": "art/robot-head/manifest.json",
+      "artworkViews": [
+        0,
+        6,
+        14,
+        17,
+        36,
+        258
+      ],
+      "walkEntry": {
+        "from": 6,
+        "x": 10,
+        "y": 113
+      }
+    },
+    "8": {
+      "name": "Aluminum Mallard",
+      "hints": [
+        "Examine the ship and its hatch. What would let you reach the handle?",
+        "Bring the ladder over to the ship."
+      ],
+      "walkEntry": {
+        "from": 7,
+        "x": 251,
+        "y": 48
+      }
+    },
+    "9": {
+      "name": "Upper conveyor",
+      "hints": [
+        "The scrap is moving toward a shredder. Look above you for a safer route."
+      ],
+      "walkEntry": {
+        "from": 12,
+        "x": 60,
+        "y": 124,
+        "onRail": true
+      }
+    },
+    "10": {
+      "name": "Shredder",
+      "hints": [
+        "Act before the conveyor reaches the blades. Look for the rail above you."
+      ],
+      "walkEntry": {
+        "from": 11,
+        "x": 120,
+        "y": 124,
+        "onRail": true
+      }
+    },
+    "11": {
+      "name": "Overhead rail",
+      "hints": [
+        "Stay on the rail. The narrower section is especially treacherous on foot."
+      ],
+      "walkEntry": {
+        "from": 10,
+        "x": 60,
+        "y": 124,
+        "onRail": true
+      }
+    },
+    "12": {
+      "name": "Rail junction",
+      "hints": [
+        "Two passages lead west. Keep to the rail while exploring them."
+      ],
+      "walkEntry": {
+        "from": 9,
+        "x": 60,
+        "y": 124,
+        "onRail": true
+      }
+    },
+    "13": {
+      "name": "Grabber station",
+      "hints": [
+        "Inspect the seat and the grabber controls.",
+        "Stop the grabber over a load before using the claw."
+      ],
+      "walkEntry": {
+        "from": 12,
+        "x": 250,
+        "y": 111,
+        "onRail": true
+      }
+    },
+    "14": {
+      "name": "Mallard cabin",
+      "hints": [
+        "Check the status computer for the ship’s missing parts.",
+        "Look beneath the floor for the reactor compartment."
+      ]
+    },
+    "15": {
+      "name": "Debris hollow",
+      "hints": [
+        "Follow the wires from the lamps to their power source.",
+        "Take the reactor before finding a way back up."
+      ],
+      "walkEntry": {
+        "from": 13,
+        "x": 80,
+        "y": 132
+      }
+    },
+    "16": {
+      "name": "Status computer",
+      "hints": [
+        "Read the diagnostic display. Each failed system corresponds to a repair the ship needs."
+      ]
+    },
+    "17": {
+      "name": "Flight controls",
+      "hints": [
+        "Keep the radar running in flight. Use F6 to return to the cockpit view."
+      ]
+    },
+    "18": {
+      "name": "Combat display",
+      "hints": [
+        "Keep an eye on your shield and the position of the incoming fighters."
+      ]
+    },
+    "19": {
+      "name": "Navigation computer",
+      "hints": [
+        "Scan for a destination before setting your course."
+      ]
+    },
+    "20": {
+      "name": "Freighter departure",
+      "hints": [
+        "There’s debris between you and open space. Check your shields before firing."
+      ]
+    },
+    "21": {
+      "name": "Planetary approach",
+      "hints": [
+        "Watch the Mallard’s approach. Once it lands, check the conditions outside."
+      ]
+    },
+    "25": {
+      "name": "Order counter",
+      "hints": [
+        "Read the menu and check how much cash you’re carrying."
+      ]
+    },
+    "27": {
+      "name": "Monolith Burger",
+      "hints": [
+        "Dock at the restaurant and explore what’s inside."
+      ]
+    },
+    "28": {
+      "name": "Dining area",
+      "hints": [
+        "Take a closer look at the arcade machine between meals."
+      ],
+      "walkEntry": {
+        "from": 29,
+        "x": 120,
+        "y": 108
+      }
+    },
+    "29": {
+      "name": "Restaurant counter",
+      "hints": [
+        "You’ll need cash to order. Check the menu when you reach the counter."
+      ],
+      "walkEntry": {
+        "from": 28,
+        "x": 172,
+        "y": 111
+      }
+    },
+    "41": {
+      "name": "Desert plain",
+      "hints": [
+        "The mountains lie to the north. Use the skyline to orient yourself."
+      ],
+      "walkEntry": {
+        "from": 54,
+        "x": 140,
+        "y": 137
+      }
+    },
+    "42": {
+      "name": "Mog’s foot",
+      "hints": [
+        "Walk around the giant foot and inspect its north end for an entrance."
+      ],
+      "walkEntry": {
+        "from": 41,
+        "x": 160,
+        "y": 142
+      }
+    },
+    "43": {
+      "name": "Mog monument",
+      "hints": [
+        "Inspect the entrances in the enormous feet. The two legs serve different purposes."
+      ],
+      "walkEntry": {
+        "from": 42,
+        "x": 160,
+        "y": 140
+      }
+    },
+    "44": {
+      "name": "Desert sign",
+      "hints": [
+        "Face the sign and move close enough to read it."
+      ],
+      "walkEntry": {
+        "from": 43,
+        "x": 160,
+        "y": 135
+      }
+    },
+    "45": {
+      "name": "Sand dunes",
+      "hints": [
+        "Use the larger dunes and distant landmarks to find your bearings."
+      ],
+      "walkEntry": {
+        "from": 41,
+        "x": 145,
+        "y": 130
+      }
+    },
+    "46": {
+      "name": "Steep dunes",
+      "hints": [
+        "Examine the depression before stepping into it."
+      ],
+      "walkEntry": {
+        "from": 45,
+        "x": 160,
+        "y": 122
+      }
+    },
+    "47": {
+      "name": "Mog overlook",
+      "hints": [
+        "The giant shape beyond the dune is mechanical. Head closer to investigate."
+      ],
+      "walkEntry": {
+        "from": 46,
+        "x": 160,
+        "y": 115
+      }
+    },
+    "48": {
+      "name": "Rock formation",
+      "hints": [
+        "Examine the opening in the rock before approaching it."
+      ],
+      "walkEntry": {
+        "from": 47,
+        "x": 160,
+        "y": 145
+      }
+    },
+    "49": {
+      "name": "Phleebhut landing site",
+      "hints": [
+        "Remember these rock formations. They mark the way back to the Mallard."
+      ],
+      "walkEntry": {
+        "from": 50,
+        "x": 140,
+        "y": 135
+      }
+    },
+    "50": {
+      "name": "Rock spires",
+      "hints": [
+        "Inspect the hole among the formations before getting too close."
+      ],
+      "walkEntry": {
+        "from": 49,
+        "x": 120,
+        "y": 144
+      }
+    },
+    "51": {
+      "name": "Rocky desert",
+      "hints": [
+        "Look at the hole from a safe distance, then explore around the rocks."
+      ],
+      "walkEntry": {
+        "from": 47,
+        "x": 145,
+        "y": 140
+      }
+    },
+    "52": {
+      "name": "Rock overhang",
+      "hints": [
+        "Inspect the pulsating pods from a safe distance. Consider how they might affect a pursuer."
+      ],
+      "walkEntry": {
+        "from": 48,
+        "x": 152,
+        "y": 121
+      }
+    },
+    "53": {
+      "name": "Snake country",
+      "hints": [
+        "Give the snake plenty of space. Look for another way around it."
+      ]
+    },
+    "54": {
+      "name": "Storm plain",
+      "hints": [
+        "The storms mark the mountains to the north. Use them to keep your bearings."
+      ],
+      "walkEntry": {
+        "from": 41,
+        "x": 157,
+        "y": 177
+      }
+    },
+    "60": {
+      "name": "Lava field",
+      "hints": [
+        "Watch where the gas vents break through the surface. Give the bubbles room."
+      ],
+      "walkEntry": {
+        "from": 61,
+        "x": 160,
+        "y": 100
+      }
+    },
+    "61": {
+      "name": "Ortega trail",
+      "hints": [
+        "Explore along solid ground and keep clear of the lava."
+      ],
+      "walkEntry": {
+        "from": 67,
+        "x": 240,
+        "y": 160
+      }
+    },
+    "62": {
+      "name": "Ortega landing site",
+      "hints": [
+        "The planet is dangerously hot. Check what you’re wearing before exploring."
+      ],
+      "walkEntry": {
+        "from": 61,
+        "x": 160,
+        "y": 112
+      }
+    },
+    "63": {
+      "name": "Ortega trail",
+      "hints": [
+        "Look for a route between the volcanic formations. Keep the way back to your ship in mind."
+      ],
+      "walkEntry": {
+        "from": 67,
+        "x": 80,
+        "y": 160
+      }
+    },
+    "64": {
+      "name": "Lava vents",
+      "hints": [
+        "Watch the vents before choosing where to walk."
+      ],
+      "walkEntry": {
+        "from": 63,
+        "x": 160,
+        "y": 110
+      }
+    },
+    "66": {
+      "name": "Lava crevice",
+      "hints": [
+        "Inspect both edges. A metal pole could help you vault the gap."
+      ],
+      "walkEntry": {
+        "from": 69,
+        "x": 168,
+        "y": 165
+      }
+    },
+    "67": {
+      "name": "Volcanic pass",
+      "hints": [
+        "Follow the stretches of solid ground toward the volcano."
+      ],
+      "walkEntry": {
+        "from": 62,
+        "x": 220,
+        "y": 120
+      }
+    },
+    "68": {
+      "name": "Volcanic vents",
+      "hints": [
+        "Watch for activity in the lava before crossing this area."
+      ],
+      "walkEntry": {
+        "from": 64,
+        "x": 110,
+        "y": 118
+      }
+    },
+    "69": {
+      "name": "Survey station",
+      "hints": [
+        "Wait for the occupants to leave, then inspect their survey equipment."
+      ],
+      "walkEntry": {
+        "from": 690,
+        "x": 70,
+        "y": 155
+      }
+    },
+    "70": {
+      "name": "Volcano base",
+      "hints": [
+        "Look for a path up the volcano and pay attention to the scout ship."
+      ],
+      "walkEntry": {
+        "from": 69,
+        "x": 160,
+        "y": 125
+      }
+    },
+    "71": {
+      "name": "Volcano slope",
+      "hints": [
+        "Follow the climb toward the rim to see what’s inside the crater."
+      ],
+      "walkEntry": {
+        "from": 70,
+        "x": 225,
+        "y": 150
+      }
+    },
+    "72": {
+      "name": "Crater rim",
+      "hints": [
+        "Examine the machine and where it’s pointing. Follow the route down to it."
+      ],
+      "walkEntry": {
+        "from": 71,
+        "x": 210,
+        "y": 173
+      }
+    },
+    "73": {
+      "name": "Generator base",
+      "hints": [
+        "Look for a route up the generator. Inspect the platform and stairs."
+      ],
+      "walkEntry": {
+        "from": 74,
+        "x": 160,
+        "y": 160
+      }
+    },
+    "74": {
+      "name": "Generator platform",
+      "hints": [
+        "The ladder is the way to the top of the generator."
+      ],
+      "walkEntry": {
+        "from": 72,
+        "x": 225,
+        "y": 180
+      }
+    },
+    "75": {
+      "name": "Generator summit",
+      "hints": [
+        "Examine the opening at the top. Think about what you brought from the survey site."
+      ],
+      "walkEntry": {
+        "from": 74,
+        "x": 160,
+        "y": 160
+      }
+    },
+    "80": {
+      "name": "Pestulon forest",
+      "hints": [
+        "Look for a clearing among the tree-like growths."
+      ],
+      "walkEntry": {
+        "from": 14,
+        "x": 160,
+        "y": 148
+      }
+    },
+    "81": {
+      "name": "ScumSoft clearing",
+      "hints": [
+        "Watch the entrance from cover. Check your belt before approaching the guards."
+      ]
+    },
+    "85": {
+      "name": "ScumSoft entrance",
+      "hints": [
+        "Keep moving while the belt has power. The guards are watching the approach."
+      ],
+      "walkEntry": {
+        "from": 81,
+        "x": 320,
+        "y": 166
+      }
+    },
+    "86": {
+      "name": "Security ramp",
+      "hints": [
+        "Inspect the wall beside the elevator door."
+      ],
+      "walkEntry": {
+        "from": 90,
+        "x": 159,
+        "y": 130
+      }
+    },
+    "90": {
+      "name": "Janitor’s closet",
+      "hints": [
+        "Look for a disguise and the equipment that goes with it."
+      ],
+      "walkEntry": {
+        "from": 91,
+        "x": 150,
+        "y": 125
+      }
+    },
+    "91": {
+      "name": "Office corridor",
+      "hints": [
+        "Act like you belong here. A janitor is expected to keep the office clean."
+      ],
+      "walkEntry": {
+        "from": 92,
+        "x": 160,
+        "y": 156
+      }
+    },
+    "92": {
+      "name": "Copier room",
+      "hints": [
+        "Look at the picture on the wall and the nearby color copier."
+      ],
+      "walkEntry": {
+        "from": 91,
+        "x": 160,
+        "y": 155,
+        "placeAfterInit": true
+      }
+    },
+    "93": {
+      "name": "Executive cubicle",
+      "hints": [
+        "Watch the boss’s movements. Inspect the desk when you have privacy."
+      ],
+      "walkEntry": {
+        "from": 91,
+        "x": 245,
+        "y": 155
+      }
+    },
+    "94": {
+      "name": "Vehicle bay",
+      "hints": [
+        "Locate your ship and remember the way back to this platform."
+      ],
+      "walkEntry": {
+        "from": 93,
+        "x": 68,
+        "y": 121
+      }
+    },
+    "95": {
+      "name": "Detention platform",
+      "hints": [
+        "Look for a way to extend the bridges before stepping into the shaft."
+      ],
+      "walkEntry": {
+        "from": 90,
+        "x": 158,
+        "y": 184
+      }
+    },
+    "96": {
+      "name": "Robot arena",
+      "hints": [
+        "Use the game screen. Arrow keys move, J punches, and M blocks. Watch your remaining power."
+      ]
+    },
+    "155": {
+      "name": "Sleep chamber",
+      "intro": true,
+      "hints": [
+        "Roger is waking up. Click the scene to skip ahead to the junk bay."
+      ]
+    },
+    "280": {
+      "name": "Monolith menu",
+      "hints": [
+        "Check the prices against the buckazoids you have."
+      ]
+    },
+    "290": {
+      "name": "Astro Chicken",
+      "hints": [
+        "Let the machine cycle through its instructions before inserting a buckazoid."
+      ]
+    },
+    "420": {
+      "name": "Mog elevator",
+      "hints": [
+        "Inspect the buttons beside the elevator shaft."
+      ],
+      "walkEntry": {
+        "from": 42,
+        "x": 93,
+        "y": 156
+      }
+    },
+    "421": {
+      "name": "Mog machinery",
+      "hints": [
+        "Examine the moving equipment and how the elevator connects the levels."
+      ],
+      "walkEntry": {
+        "from": 420,
+        "x": 160,
+        "y": 126
+      }
+    },
+    "470": {
+      "name": "World O’ Wonders",
+      "hints": [
+        "Talk to Fester and examine his wares. Something you already own may interest him."
+      ]
+    },
+    "471": {
+      "name": "Postcard rack",
+      "hints": [
+        "Look at each card for clues about places beyond the shop."
+      ]
+    },
+    "690": {
+      "name": "Observation scope",
+      "hints": [
+        "Look where the beam meets the moon. It explains why an ordinary approach will fail."
+      ]
+    },
+    "777": {
+      "name": "Startup",
+      "intro": true,
+      "hints": [
+        "The game is checking its animation speed. The opening sequence follows."
+      ]
+    },
+    "900": {
+      "name": "Title sequence",
+      "intro": true,
+      "hints": [
+        "Click the game screen to skip the opening and follow Roger into the junk freighter."
+      ]
+    }
+  },
+  "resourceHashes": {
+    "RESOURCE.MAP": "9075d55e53cee2f70b75404bb215c5a37cfc2bb8803896706179a10b099efb42",
+    "RESOURCE.001": "a8a3aa34df74d7e2425293ad8dee52d1d31e21338d6402a49dd0ffd380e3a47a",
+    "RESOURCE.002": "88c064e7c5b02b7b30c4b2c720eb5aed2344f73378b77bc103824a276609f01c",
+    "RESOURCE.003": "17829237d60bba989d56913d22ea51971de7b6e471654a930e4c60db7312cc29"
+  }
+}

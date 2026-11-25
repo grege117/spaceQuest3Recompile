@@ -1,0 +1,36 @@
+{
+  "room": 81,
+  "picture": 81,
+  "screen": [
+    320,
+    200
+  ],
+  "objects": [
+    {
+      "name": "guard",
+      "view": 135,
+      "loop": 1,
+      "cel": 2,
+      "priority": 8,
+      "bounds": [
+        245,
+        113,
+        253,
+        130
+      ]
+    },
+    {
+      "name": "door",
+      "view": 135,
+      "loop": 0,
+      "cel": 0,
+      "priority": 4,
+      "bounds": [
+        244,
+        129,
+        288,
+        153
+      ]
+    }
+  ]
+}

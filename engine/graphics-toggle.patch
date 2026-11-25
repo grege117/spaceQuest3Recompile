@@ -1,0 +1,136 @@
+--- a/engines/sci/graphics/view.cpp
++++ b/engines/sci/graphics/view.cpp
+@@ -815,7 +815,7 @@
+ 	// Replacement cels share the SCI dimensions and silhouette. Keep the
+ 	// original transparency and priority tests and replace only accepted pixels.
+ 	Common::Array<byte> replacement;
+-	if (EM_ASM_INT({ return !!window.sq3Artwork.active; })) {
++	if (EM_ASM_INT({ return !!window.sq3Artwork.packActive; })) {
+ 		replacement.resize(celWidth * celHeight);
+ 		if (!EM_ASM_INT({
+ 			const cel = window.sq3Artwork.cel($0, $1, $2, $3, $4);
+--- a/engines/sci/graphics/paint16.cpp
++++ b/engines/sci/graphics/paint16.cpp
+@@ -119,7 +119,7 @@
+ 		}
+ 		// Replace only display pixels. SCI retains its original visual, priority,
+ 		// and control buffers for flood fills, hit tests and sprite occlusion.
+-		const bool wasActive = EM_ASM_INT({ return !!window.sq3Artwork.active; });
++		const bool wasActive = EM_ASM_INT({ return !!window.sq3Artwork.packActive; });
+ 		if (EM_ASM_INT({ return window.sq3Artwork.needsPack($0); }, pictureId))
+ 			sq3LoadPictureArt(pictureId);
+ 		bool active = EM_ASM_INT({ return window.sq3Artwork.select($0, $1, $2); },
+--- a/engines/sci/graphics/palette.cpp
++++ b/engines/sci/graphics/palette.cpp
+@@ -508,7 +508,7 @@
+ 		g_sci->_gfxRemap16->updateRemapping();
+ 
+ 	if (g_sci->getGameId() == GID_SQ3)
+-		EM_ASM({ if (window.sq3Artwork.active) HEAPU8.set(window.sq3Artwork.colors, $0 + 48); }, bpal);
++		EM_ASM({ if (window.sq3Artwork.packActive) HEAPU8.set(window.sq3Artwork.colors, $0 + 48); }, bpal);
+ 	_screen->setPalette(bpal, 0, 256, update);
+ }
+ 
+--- a/engines/sci/graphics/screen.h
++++ b/engines/sci/graphics/screen.h
+@@ -76,7 +76,8 @@
+ 	uint16 getHeight() { return _height; }
+ 	uint16 getScriptWidth() { return _scriptWidth; }
+ 	uint16 getScriptHeight() { return _scriptHeight; }
+-	const byte *getDisplayPixels() const { return _displayScreen; }
++	const byte *getDisplayPixels() const { return _activeScreen; }
++	void syncSQ3GraphicsMode();
+ 	uint16 getDisplayWidth() { return _displayWidth; }
+ 	uint16 getDisplayHeight() { return _displayHeight; }
+ 	byte getColorWhite() { return _colorWhite; }
+@@ -214,6 +215,8 @@
+ 	byte _curPaletteMapValue;
+ 	PaletteMod _paletteMods[256];
+ 	bool _paletteModsEnabled;
++
++	Graphics::Surface _sq3OriginalFrame, _sq3EnhancedFrame;
+ 
+ 	byte *_backupScreen; // for bak* functions
+ 
+--- a/engines/sci/graphics/screen.cpp
++++ b/engines/sci/graphics/screen.cpp
+@@ -31,6 +31,7 @@
+ #include "sci/sci.h"
+ #include "sci/engine/state.h"
+ #include "sci/graphics/screen.h"
++#include <emscripten/em_asm.h>
+ #include "sci/graphics/view.h"
+ #include "sci/graphics/palette.h"
+ #include "sci/graphics/scifx.h"
+@@ -243,6 +244,12 @@
+ 
+ 	// Sets display screen to be actually displayed
+ 	_activeScreen = _displayScreen;
++	if (g_sci->getGameId() == GID_SQ3 && _width == _displayWidth && _height == _displayHeight) {
++		_sq3OriginalFrame.create(_width, _height, format8);
++		_sq3EnhancedFrame.create(_width, _height, format8);
++		if (EM_ASM_INT({ return !!window.sq3Artwork.original; }))
++			_activeScreen = _visualScreen;
++	}
+ 
+ 	_picNotValid = 0;
+ 	_picNotValidSci11 = 0;
+@@ -279,6 +286,8 @@
+ }
+ 
+ GfxScreen::~GfxScreen() {
++	_sq3OriginalFrame.free();
++	_sq3EnhancedFrame.free();
+ 	free(_visualScreen);
+ 	free(_priorityScreen);
+ 	free(_controlScreen);
+@@ -290,6 +299,18 @@
+ }
+ 
+ void GfxScreen::displayRect(const Common::Rect &rect, int x, int y) {
++	// SCI restores the background beneath actors after each animation pass.
++	// Remember pixels as they are presented, while the actors and windows
++	// are still composited, including translated blits during transitions.
++	if (_sq3OriginalFrame.getPixels()) {
++		Common::Rect source(rect), dest(rect);
++		dest.moveTo(x, y);
++		if (!dest.isEmpty() && _sq3OriginalFrame.clip(source, dest)) {
++			const int offset = source.top * _width + source.left;
++			_sq3OriginalFrame.copyRectToSurface(_visualScreen + offset, _width, dest.left, dest.top, dest.width(), dest.height());
++			_sq3EnhancedFrame.copyRectToSurface(_displayScreen + offset, _width, dest.left, dest.top, dest.width(), dest.height());
++		}
++	}
+ 	// Display rect from _activeScreen to screen location x, y.
+ 	// Clipping is assumed to be done already.
+ 	_gfxDrv->copyRectToScreen(_activeScreen, rect.left, rect.top,
+@@ -307,6 +328,19 @@
+ 	memset(&_ditheredPicColors, 0, sizeof(_ditheredPicColors));
+ 	_fontIsUpscaled = false;
+ 	copyToScreen();
++}
++
++void GfxScreen::syncSQ3GraphicsMode() {
++	if (!_sq3OriginalFrame.getPixels() || _backupScreen)
++		return;
++	const bool original = EM_ASM_INT({ return !!window.sq3Artwork.original; });
++	byte *next = original ? _visualScreen : _displayScreen;
++	if (_activeScreen == next)
++		return;
++	_activeScreen = next;
++	const Graphics::Surface &frame = original ? _sq3OriginalFrame : _sq3EnhancedFrame;
++	_gfxDrv->copyRectToScreen((const byte *)frame.getPixels(), 0, 0, frame.pitch, 0, 0,
++		frame.w, frame.h, nullptr, nullptr);
+ }
+ 
+ void GfxScreen::copyToScreen() {
+--- a/engines/sci/event.cpp
++++ b/engines/sci/event.cpp
+@@ -430,6 +430,8 @@
+ 	// Throttle the screen update rate to 60fps.
+ 	EngineState *s = g_sci->getEngineState();
+ 	if (g_system->getMillis() - s->_screenUpdateTime >= 1000 / 60) {
++		if (g_sci->_gfxScreen)
++			g_sci->_gfxScreen->syncSQ3GraphicsMode();
+ 		g_system->updateScreen();
+ 		s->_screenUpdateTime = g_system->getMillis();
+ 		// Throttle the checking of shouldQuit() to 60fps as well, since

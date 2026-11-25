@@ -1,0 +1,257 @@
+{
+  "room": 92,
+  "picture": 92,
+  "screen": [
+    320,
+    200
+  ],
+  "objects": [
+    {
+      "name": "trash7",
+      "view": 115,
+      "loop": 4,
+      "cel": 0,
+      "priority": 2,
+      "bounds": [
+        103,
+        58,
+        109,
+        65
+      ]
+    },
+    {
+      "name": "nerd8",
+      "view": 115,
+      "loop": 2,
+      "cel": 0,
+      "priority": 2,
+      "bounds": [
+        196,
+        53,
+        208,
+        66
+      ]
+    },
+    {
+      "name": "trash6",
+      "view": 115,
+      "loop": 4,
+      "cel": 0,
+      "priority": 2,
+      "bounds": [
+        40,
+        60,
+        46,
+        67
+      ]
+    },
+    {
+      "name": "nerd7",
+      "view": 115,
+      "loop": 0,
+      "cel": 0,
+      "priority": 2,
+      "bounds": [
+        75,
+        51,
+        92,
+        69
+      ]
+    },
+    {
+      "name": "nerd6",
+      "view": 115,
+      "loop": 1,
+      "cel": 0,
+      "priority": 3,
+      "bounds": [
+        55,
+        52,
+        72,
+        70
+      ]
+    },
+    {
+      "name": "trash8",
+      "view": 115,
+      "loop": 4,
+      "cel": 0,
+      "priority": 3,
+      "bounds": [
+        207,
+        72,
+        213,
+        79
+      ]
+    },
+    {
+      "name": "trash5",
+      "view": 115,
+      "loop": 4,
+      "cel": 0,
+      "priority": 5,
+      "bounds": [
+        155,
+        91,
+        161,
+        98
+      ]
+    },
+    {
+      "name": "nerd5",
+      "view": 115,
+      "loop": 1,
+      "cel": 0,
+      "priority": 5,
+      "bounds": [
+        170,
+        82,
+        187,
+        100
+      ]
+    },
+    {
+      "name": "nerd4",
+      "view": 115,
+      "loop": 2,
+      "cel": 0,
+      "priority": 8,
+      "bounds": [
+        201,
+        110,
+        213,
+        123
+      ]
+    },
+    {
+      "name": "nerd2",
+      "view": 115,
+      "loop": 2,
+      "cel": 0,
+      "priority": 8,
+      "bounds": [
+        66,
+        114,
+        78,
+        127
+      ]
+    },
+    {
+      "name": "trash2",
+      "view": 115,
+      "loop": 4,
+      "cel": 0,
+      "priority": 8,
+      "bounds": [
+        45,
+        122,
+        51,
+        129
+      ]
+    },
+    {
+      "name": "trash3",
+      "view": 115,
+      "loop": 4,
+      "cel": 0,
+      "priority": 8,
+      "bounds": [
+        150,
+        122,
+        156,
+        129
+      ]
+    },
+    {
+      "name": "nerd3",
+      "view": 115,
+      "loop": 3,
+      "cel": 0,
+      "priority": 11,
+      "bounds": [
+        166,
+        120,
+        182,
+        129
+      ]
+    },
+    {
+      "name": "trash4",
+      "view": 115,
+      "loop": 4,
+      "cel": 0,
+      "priority": 9,
+      "bounds": [
+        218,
+        132,
+        224,
+        139
+      ]
+    },
+    {
+      "name": "trash1",
+      "view": 115,
+      "loop": 4,
+      "cel": 0,
+      "priority": 11,
+      "bounds": [
+        117,
+        154,
+        123,
+        161
+      ]
+    },
+    {
+      "name": "nerd1",
+      "view": 115,
+      "loop": 0,
+      "cel": 0,
+      "priority": 11,
+      "bounds": [
+        85,
+        146,
+        102,
+        164
+      ]
+    },
+    {
+      "name": "fink1",
+      "view": 115,
+      "loop": 0,
+      "cel": 0,
+      "priority": 11,
+      "bounds": [
+        324,
+        148,
+        341,
+        166
+      ]
+    },
+    {
+      "name": "ego",
+      "view": 63,
+      "loop": 2,
+      "cel": 1,
+      "priority": 12,
+      "bounds": [
+        143,
+        134,
+        161,
+        175
+      ]
+    },
+    {
+      "name": "photoBoss",
+      "view": 103,
+      "loop": 0,
+      "cel": 0,
+      "priority": 14,
+      "bounds": [
+        89,
+        166,
+        105,
+        182
+      ]
+    }
+  ]
+}

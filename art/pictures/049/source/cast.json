@@ -1,0 +1,36 @@
+{
+  "room": 49,
+  "picture": 49,
+  "screen": [
+    320,
+    200
+  ],
+  "objects": [
+    {
+      "name": "lightning",
+      "view": 69,
+      "loop": 4,
+      "cel": 0,
+      "priority": 2,
+      "bounds": [
+        46,
+        63,
+        50,
+        65
+      ]
+    },
+    {
+      "name": "ego",
+      "view": 63,
+      "loop": 2,
+      "cel": 0,
+      "priority": 14,
+      "bounds": [
+        152,
+        159,
+        170,
+        200
+      ]
+    }
+  ]
+}

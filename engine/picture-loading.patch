@@ -1,0 +1,48 @@
+--- a/engines/sci/graphics/paint16.cpp
++++ b/engines/sci/graphics/paint16.cpp
+@@ -20,6 +20,7 @@
+  */
+ 
+ #include <emscripten/em_asm.h>
++#include <emscripten/em_js.h>
+ #include "sci/sci.h"
+ #include "sci/engine/features.h"
+ #include "sci/engine/state.h"
+@@ -42,6 +43,10 @@
+ 
+ #include "sci/graphics/scifx.h"
+ 
++EM_ASYNC_JS(void, sq3LoadPictureArt, (int id), {
++	await window.sq3Artwork.prepare(id);
++});
++
+ namespace Sci {
+ 
+ GfxPaint16::GfxPaint16(ResourceManager *resMan, SegManager *segMan, GfxCache *cache, GfxPorts *ports, GfxCoordAdjuster16 *coordAdjuster, GfxScreen *screen, GfxPalette *palette, GfxTransitions *transitions, AudioPlayer *audio)
+@@ -85,7 +90,7 @@
+ 		area.clip(Common::Rect(_screen->getWidth(), _screen->getHeight()));
+ 		const int width = area.width(), height = area.height();
+ 		const int count = EM_ASM_INT({ return window.sq3Artwork.exportViewCount($0); }, pictureId);
+-		if (count > 0) {
++		if (count >= 0) {
+ 			Common::Array<byte> planes(width * height * 3);
+ 			for (int y = 0; y < height; ++y) {
+ 				for (int x = 0; x < width; ++x) {
+@@ -115,6 +120,8 @@
+ 		// Replace only display pixels. SCI retains its original visual, priority,
+ 		// and control buffers for flood fills, hit tests and sprite occlusion.
+ 		const bool wasActive = EM_ASM_INT({ return !!window.sq3Artwork.active; });
++		if (EM_ASM_INT({ return window.sq3Artwork.needsPack($0); }, pictureId))
++			sq3LoadPictureArt(pictureId);
+ 		bool active = EM_ASM_INT({ return window.sq3Artwork.select($0, $1, $2); },
+ 			pictureId, width, height);
+ 		if (active) {
+@@ -122,7 +129,7 @@
+ 			EM_ASM({ HEAPU8.set(window.sq3Artwork.background, $0); }, pixels.data());
+ 			for (int y = 0; y < height; ++y)
+ 				for (int x = 0; x < width; ++x)
+-					_screen->putPixelOnDisplay(area.left + x, area.top + y, pixels[y * width + x]);
++					_screen->putPixelOnDisplay(area.left + x, area.top + y, pixels[y * width + (mirroredFlag ? width - 1 - x : x)]);
+ 		}
+ 		if (active || wasActive)
+ 			_palette->setOnScreen(false);

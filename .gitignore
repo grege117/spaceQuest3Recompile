@@ -1,0 +1,26 @@
+/.build/
+/_site/
+/SQ3/
+*.zip
+__pycache__/
+# Original decoded artwork and unmodified SCI overlays and blackout pictures.
+/art/**/source/*.png
+/art/shared/original.png
+/art/pictures/121/background.png
+/art/pictures/151/background.png
+/art/pictures/152/background.png
+/art/pictures/161/background.png
+/art/pictures/191/background.png
+/art/pictures/201/background.png
+/art/pictures/202/background.png
+/art/pictures/203/background.png
+/art/pictures/204/background.png
+/art/pictures/205/background.png
+/art/pictures/206/background.png
+/art/pictures/207/background.png
+/art/pictures/300/background.png
+/art/pictures/540/background.png
+/art/pictures/777/background.png
+/art/pictures/926/background.png
+/.pages-*/
+/art/pictures/032/sprites.png

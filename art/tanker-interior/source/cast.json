@@ -1,0 +1,48 @@
+{
+  "room": 6,
+  "screen": [
+    320,
+    200
+  ],
+  "objects": [
+    {
+      "name": "wire",
+      "view": 192,
+      "loop": 2,
+      "cel": 0,
+      "priority": 8,
+      "bounds": [
+        72,
+        110,
+        82,
+        135
+      ]
+    },
+    {
+      "name": "ego",
+      "view": 0,
+      "loop": 0,
+      "cel": 3,
+      "priority": 10,
+      "bounds": [
+        38,
+        126,
+        53,
+        158
+      ]
+    },
+    {
+      "name": "shadow",
+      "view": 7,
+      "loop": 0,
+      "cel": 3,
+      "priority": 4,
+      "bounds": [
+        44,
+        117,
+        70,
+        158
+      ]
+    }
+  ]
+}

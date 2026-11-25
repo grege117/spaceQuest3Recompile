@@ -1,0 +1,62 @@
+{
+  "room": 121,
+  "picture": 121,
+  "screen": [
+    320,
+    200
+  ],
+  "objects": [
+    {
+      "name": "door",
+      "view": 194,
+      "loop": 0,
+      "cel": 7,
+      "priority": 5,
+      "bounds": [
+        137,
+        87,
+        171,
+        124
+      ]
+    },
+    {
+      "name": "guard1",
+      "view": 210,
+      "loop": 2,
+      "cel": 3,
+      "priority": 5,
+      "bounds": [
+        146,
+        94,
+        152,
+        111
+      ]
+    },
+    {
+      "name": "guard2",
+      "view": 210,
+      "loop": 2,
+      "cel": 3,
+      "priority": 5,
+      "bounds": [
+        152,
+        94,
+        158,
+        111
+      ]
+    },
+    {
+      "name": "ego",
+      "view": 68,
+      "loop": 2,
+      "cel": 3,
+      "priority": 15,
+      "bounds": [
+        149,
+        97,
+        157,
+        114
+      ]
+    }
+  ]
+}

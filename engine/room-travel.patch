@@ -1,0 +1,116 @@
+--- a/engines/sci/engine/kevent.cpp
++++ b/engines/sci/engine/kevent.cpp
+@@ -89,6 +89,33 @@
+ 	}
+ 
+ 	curEvent = g_sci->getEventManager()->getSciEvent(mask);
++	// Handle real game-screen keys only. SCI's own text editors and menus
++	// use a different event object, and parser messages use the simkey above.
++	if (g_sci->getGameId() == GID_SQ3 && !(mask & kSciEventPeek) &&
++			curEvent.type == kSciEventKeyDown && (curEvent.character == '[' || curEvent.character == ']') &&
++			!(curEvent.modifiers & (kSciKeyModCtrl | kSciKeyModAlt)) &&
++			Common::String(segMan->getObjectName(obj)) == "uEvt") {
++		reg_t *globals = s->variables[VAR_GLOBAL];
++		const int room = globals[kGlobalVarCurrentRoomNo].toUint16();
++		const int next = EM_ASM_INT({ return window.sq3.walkDestination($0, $1); },
++			room, curEvent.character == ']' ? 1 : -1);
++		if (next > 0 && s->currentRoomNumber() == room) {
++			// Run the room's departure hooks, then schedule the requested stop
++			// even if a scripted exit normally gates or redirects the player.
++			reg_t destination = make_reg(0, next);
++			invokeSelector(s, globals[kGlobalVarCurrentRoom], g_sci->getKernel()->findSelector("newRoom"),
++				argc, argv, 1, &destination);
++			s->setRoomNumber(next);
++			// SQ3's teleport command clears these transient script locks.
++			globals[100] = globals[155] = globals[159] = globals[193] = NULL_REG;
++			const reg_t user = segMan->findObjectByName("User");
++			writeSelectorValue(segMan, user, SELECTOR(controls), 1);
++			writeSelectorValue(segMan, user, SELECTOR(canInput), 1);
++			writeSelectorValue(segMan, user, g_sci->getKernel()->findSelector("prevDir"), 0);
++			EM_ASM({ window.sq3.walkArrival = $0; }, next);
++			curEvent.type = kSciEventNone;
++		}
++	}
+ 
+ 	// For Mac games with an icon bar, handle possible icon bar events first
+ 	if (g_sci->hasMacIconBar()) {
+--- a/engines/sci/engine/kmisc.cpp
++++ b/engines/sci/engine/kmisc.cpp
+@@ -19,6 +19,8 @@
+  *
+  */
+ 
++#include <emscripten/em_asm.h>
++#include "sci/engine/selector.h"
+ #include "common/config-manager.h"
+ #include "common/savefile.h"
+ #include "common/system.h"
+@@ -244,6 +246,35 @@
+ }
+ 
+ reg_t kFlushResources(EngineState *s, int argc, reg_t *argv) {
++	// SQ3 calls FlushResources after disposing the old cast and just before
++	// starting the new room. Ordinary exits and save restores use SCI's state.
++	if (g_sci->getGameId() == GID_SQ3) {
++		int entry[4];
++		if (EM_ASM_INT({
++			const arrival = window.sq3.takeWalkArrival($0);
++			if (!arrival) return 0;
++			HEAP32.set([arrival.from, arrival.x, arrival.y, arrival.onRail ? 3 : 0], $1 >> 2);
++			return 1;
++		}, argv[0].toUint16(), entry)) {
++			reg_t *globals = s->variables[VAR_GLOBAL];
++			globals[kGlobalVarPreviousRoomNo] = make_reg(0, entry[0]);
++			globals[132] = make_reg(0, entry[3]); // Freighter rail travel mode
++			const reg_t ego = globals[kGlobalVarEgo];
++			writeSelectorValue(s->_segMan, ego, SELECTOR(x), entry[1]);
++			writeSelectorValue(s->_segMan, ego, SELECTOR(y), entry[2]);
++			writeSelectorValue(s->_segMan, ego, SELECTOR(view), 0);
++			writeSelectorValue(s->_segMan, ego, SELECTOR(loop), 2);
++			writeSelectorValue(s->_segMan, ego, SELECTOR(cel), 0);
++			writeSelectorValue(s->_segMan, ego, SELECTOR(z), 0);
++			writeSelectorValue(s->_segMan, ego, SELECTOR(signal), 0x2000); // SQ3 Ego default
++			writeSelectorValue(s->_segMan, ego, SELECTOR(illegalBits), 0x8000);
++			writeSelectorValue(s->_segMan, ego, SELECTOR(xStep), 3);
++			writeSelectorValue(s->_segMan, ego, SELECTOR(yStep), 2);
++			writeSelectorValue(s->_segMan, ego, SELECTOR(moveSpeed), 0);
++			writeSelectorValue(s->_segMan, ego, SELECTOR(cycleSpeed), 0);
++			writeSelectorValue(s->_segMan, ego, g_sci->getKernel()->findSelector("edgeHit"), 0);
++		}
++	}
+ 	run_gc(s);
+ 	debugC(kDebugLevelRoom, "Entering room number %d", argv[0].toUint16());
+ 	return s->r_acc;
+--- a/engines/sci/engine/kparse.cpp
++++ b/engines/sci/engine/kparse.cpp
+@@ -21,6 +21,7 @@
+ 
+ /* String and parser handling */
+ 
++#include <emscripten/em_asm.h>
+ #include "sci/resource/resource.h"
+ #include "sci/engine/state.h"
+ #include "sci/engine/selector.h"
+@@ -159,6 +160,22 @@
+ }
+ 
+ reg_t kSetSynonyms(EngineState *s, int argc, reg_t *argv) {
++	// Game::newRoom installs synonyms after the destination has initialized
++	// its actors. Some rooms restore a remembered position during that init.
++	if (g_sci->getGameId() == GID_SQ3) {
++		int feet[2];
++		if (EM_ASM_INT({
++			const entry = window.sq3.takeWalkArrival($0, true);
++			if (!entry) return 0;
++			HEAP32.set([entry.x, entry.y], $1 >> 2);
++			return 1;
++		}, s->variables[VAR_GLOBAL][kGlobalVarCurrentRoomNo].toUint16(), feet)) {
++			const reg_t ego = s->variables[VAR_GLOBAL][kGlobalVarEgo];
++			reg_t coords[] = {make_reg(0, feet[0]), make_reg(0, feet[1])};
++			invokeSelector(s, ego, g_sci->getKernel()->findSelector("posn"), argc, argv, 2, coords);
++		}
++	}
++
+ 	SegManager *segMan = s->_segMan;
+ 	reg_t object = argv[0];
+ 	int numSynonyms = 0;
