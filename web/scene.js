@@ -1,3 +1,64 @@
+import {unzlibSync} from "./vendor/fflate/browser.js";
+
+function paeth(left, above, corner) {
+  const p = left + above - corner;
+  const a = Math.abs(p - left), b = Math.abs(p - above), c = Math.abs(p - corner);
+  if (a <= b && a <= c) return left;
+  return b <= c ? above : corner;
+}
+
+// The art compilers write non-interlaced, 8-bit RGB backgrounds and RGBA atlases.
+// SCI needs the exact stored channel values, before browser display processing.
+export function decodeArtPng(bytes, indices) {
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  if (bytes.length < 33 || view.getUint32(0) !== 0x89504e47 ||
+      view.getUint32(4) !== 0x0d0a1a0a || view.getUint32(8) !== 13 ||
+      view.getUint32(12) !== 0x49484452) throw new Error("Invalid artwork PNG header");
+  const width = view.getUint32(16), height = view.getUint32(20);
+  const channels = bytes[25] === 2 ? 3 : 4;
+  if (!width || !height || width * height > 16 * 1024 * 1024 ||
+      bytes[24] !== 8 || ![2, 6].includes(bytes[25]) || bytes[26] || bytes[27] || bytes[28])
+    throw new Error("Unsupported artwork PNG format");
+
+  // Consecutive IDAT chunks comprise a single zlib stream.
+  const compressed = new Uint8Array(bytes.length);
+  let length = 0;
+  for (let pos = 33; pos + 12 <= bytes.length;) {
+    const size = view.getUint32(pos), type = view.getUint32(pos + 4);
+    if (pos + 12 + size > bytes.length) throw new Error("Incomplete artwork PNG chunk");
+    if (type === 0x49444154) {
+      compressed.set(bytes.subarray(pos + 8, pos + 8 + size), length);
+      length += size;
+    }
+    pos += size + 12;
+    if (type === 0x49454e44) break;
+  }
+  const stride = 1 + width * channels;
+  const scan = unzlibSync(compressed.subarray(0, length), {out: new Uint8Array(height * stride)});
+  if (scan.length !== height * stride) throw new Error("Incomplete artwork PNG scanlines");
+  const pixels = new Uint8Array(width * height);
+  for (let y = 0; y < height; y++) {
+    const row = y * stride, filter = scan[row];
+    if (filter > 4) throw new Error("Unknown artwork PNG row filter");
+    for (let i = row + 1; filter && i < row + stride; i++) {
+      const left = i > row + channels ? scan[i - channels] : 0;
+      const above = y ? scan[i - stride] : 0;
+      if (filter === 1) scan[i] += left;
+      else if (filter === 2) scan[i] += above;
+      else if (filter === 3) scan[i] += (left + above) >> 1;
+      else scan[i] += paeth(left, above, y && i > row + channels ? scan[i - stride - channels] : 0);
+    }
+    for (let x = 0, i = row + 1; x < width; x++, i += channels) {
+      if (channels === 4 && scan[i + 3] === 0) continue;
+      const color = (scan[i] << 16) | (scan[i + 1] << 8) | scan[i + 2];
+      const index = indices.get(color);
+      if (index === undefined) throw new Error("Unlisted artwork palette color");
+      pixels[y * width + x] = index;
+    }
+  }
+  return {width, height, pixels};
+}
+
 // The VM supplies a composited frame with three 4-bit EGA indices per pixel.
 export const ega = [
   0x000000, 0x0000aa, 0x00aa00, 0x00aaaa, 0xaa0000, 0xaa00aa, 0xaa5500, 0xaaaaaa,

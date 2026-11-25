@@ -1,4 +1,4 @@
-import {ega, encodePlane} from "./scene.js";
+import {decodeArtPng, ega, encodePlane} from "./scene.js";
 
 // Emscripten calls these methods while the SCI picture and cel data are live.
 const params = new URLSearchParams(location.search);
@@ -88,24 +88,13 @@ export const artwork = {
 window.sq3Artwork = artwork;
 
 async function loadIndices(url, indices) {
-  const img = new Image();
-  img.src = url;
-  await img.decode();
-  const canvas = document.createElement("canvas");
-  canvas.width = img.naturalWidth;
-  canvas.height = img.naturalHeight;
-  const ctx = canvas.getContext("2d", {willReadFrequently: true});
-  ctx.drawImage(img, 0, 0);
-  const rgba = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-  const pixels = new Uint8Array(canvas.width * canvas.height);
-  for (let i = 0; i < pixels.length; i++) {
-    if (!rgba[4*i+3]) continue;
-    const color = (rgba[4*i] << 16) | (rgba[4*i+1] << 8) | rgba[4*i+2];
-    const index = indices.get(color);
-    if (index === undefined) throw new Error("Unlisted artwork palette color in " + img.src);
-    pixels[i] = index;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    return decodeArtPng(new Uint8Array(await response.arrayBuffer()), indices);
+  } catch (error) {
+    throw new Error(error.message + " in " + url);
   }
-  return {pixels, width: canvas.width, height: canvas.height};
 }
 
 function decodeCels(entries, atlas) {
